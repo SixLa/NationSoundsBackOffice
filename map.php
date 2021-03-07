@@ -53,12 +53,10 @@
 
                     <!-- Page Heading -->
                     
-                    <h1 class="h3 mb-2 text-white">Tables</h1>
-                    <p class="mb-4 text-white">DataTables is a third party plugin that is used to generate the demo table below.
-                        For more information about DataTables, please visit the <a class="text-white" target="_blank"
-                            href="https://datatables.net">official DataTables documentation</a>.</p>        
-                            
-                           
+                    <h1 class="h3 mb-2 text-white">Carte interactive</h1>
+                    <p class="mb-4 text-white"> Vous pouvez ici voir les différents points d'intérêts de la carte interactive.</p>
+                    <a href="map-create.php" class="btn btn-primary btn-lg" role="button" aria-pressed="true">Ajouter un point</a>
+         
                 <div class="card shadow mb-4">
                                     <div class="card-body">
                                         <div class="table-responsive">

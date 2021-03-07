@@ -57,74 +57,67 @@
                         For more information about DataTables, please visit the <a class="text-white" target="_blank"
                             href="https://datatables.net">official DataTables documentation</a>.</p>
 
-<!--Récupérer les infos dans la BDD et les afficher  -->
+            <!--Récupérer les infos dans la BDD et les afficher  -->
 
-<?php
-try
-{
-	$bdd = new PDO('mysql:host=localhost;dbname=nationsounds;charset=utf8', 'root', '');
-}
-catch(Exception $e)
-{
-        die('Erreur : '.$e->getMessage());
-}
-$reponse = $bdd->query('SELECT map_ID , map_nomlieu, map_filtre, map_longitude, map_latitude FROM info_map');
-while ($donnees = $reponse->fetch())
-{
-?>
-                             
-    <div class="card shadow mb-4">
-                        <div class="card-body">
-                            <div class="table-responsive">
-                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                    <thead>
-                                        <tr>
-                                            <th>ID</th>
-                                            <th>Nom</th>
-                                            <th>Filtre</th>
-                                            <th>Longitude</th>
-                                            <th>Latitude</th>
-                                            <th>Actions</th>
-                                        </tr>
-                                    </thead>
-                                    <tfoot>
-                                        <tr>
-                                            <th>ID</th>
-                                            <th>Nom</th>
-                                            <th>Filtre</th>
-                                            <th>Longitude</th>
-                                            <th>Latitude</th>
-                                            <th>Actions</th>
-                                        </tr>
-                                    </tfoot>
-                                    <tbody>
+            <?php
+            require("connection.php");
+            $reponse = $bdd->query('SELECT map_ID , map_nomlieu, map_filtre, map_longitude, map_latitude FROM info_map');
+            while ($donnees = $reponse->fetch())
+            {
+            ?>
                                         
-                                        <tr> 
-                                               
-                                            <td><?php echo $donnees['map_ID']; ?></td>
-                                            <td><?php echo $donnees['map_nomlieu']; ?></td>
-                                            <td><?php echo $donnees['map_filtre']; ?></td>
-                                            <td><?php echo $donnees['map_longitude']; ?></td>
-                                            <td><?php echo $donnees['map_latitude']; ?></td>
-                                            <td class="d-flex justify-content-around">
-                                                <a href=""><i class="fas fa-eye btn-info btn.circle btn-sm" title="Voir"></i></a>
-                                                <a href=""><i class="fas fa-pencil-alt btn-primary btn.circle btn-sm" title="Modifier"></i></a>
-                                                <a href=""><i class="fas fa-trash btn-danger btn.circle btn-sm" title="Supprimer"></i></a>
-                                            </td>
-                                        </tr>  
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-<?php
-}
+                <div class="card shadow mb-4">
+                                    <div class="card-body">
+                                        <div class="table-responsive">
+                                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                                <thead>
+                                                    <tr>
+                                                        <th>ID</th>
+                                                        <th>Nom</th>
+                                                        <th>Filtre</th>
+                                                        <th>Longitude</th>
+                                                        <th>Latitude</th>
+                                                        <th>Actions</th>
+                                                    </tr>
+                                                </thead>
+                                                <tfoot>
+                                                    <tr>
+                                                        <th>ID</th>
+                                                        <th>Nom</th>
+                                                        <th>Filtre</th>
+                                                        <th>Longitude</th>
+                                                        <th>Latitude</th>
+                                                        <th>Actions</th>
+                                                    </tr>
+                                                </tfoot>
+                                                <tbody>
+                                                    
+                                                    <tr> 
+                                                        
+                                                        <td><?php echo $donnees['map_ID']; ?></td>
+                                                        <td><?php echo $donnees['map_nomlieu']; ?></td>
+                                                        <td><?php echo $donnees['map_filtre']; ?></td>
+                                                        <td><?php echo $donnees['map_longitude']; ?></td>
+                                                        <td><?php echo $donnees['map_latitude']; ?></td>
+                                                        <td class="d-flex justify-content-around">
+                                                            <a href=""><i class="fas fa-eye btn-info btn.circle btn-sm" title="Voir"></i></a>
+                                                            <a href=""><i class="fas fa-pencil-alt btn-primary btn.circle btn-sm" title="Modifier"></i></a>
+                                                            <a href=""><i class="fas fa-trash btn-danger btn.circle btn-sm" title="Supprimer"></i></a>
+                                                        </td>
+                                                    </tr>  
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+            <?php
+            }
 
-$reponse->closeCursor(); // Termine le traitement de la requête
+            $reponse->closeCursor(); // Termine le traitement de la requête
 
-?>
+            ?>
 
-<!-- Fin de la récupération -->
+            <!-- Fin de la récupération -->
                    
             </div>
             <!-- End of Main Content -->

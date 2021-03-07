@@ -66,7 +66,7 @@
                                                 <thead>
 
                                                     <tr>
-                                                        <th>ID</th>
+                                                        
                                                         <th>Nom</th>
                                                         <th>Filtre</th>
                                                         <th>Longitude</th>
@@ -76,7 +76,7 @@
                                                 </thead>
                                                 <tfoot>
                                                     <tr>
-                                                        <th>ID</th>
+                                                        
                                                         <th>Nom</th>
                                                         <th>Filtre</th>
                                                         <th>Longitude</th>
@@ -93,19 +93,16 @@
                 $requete = "SELECT map_ID , map_nomlieu, map_filtre, map_longitude, map_latitude FROM info_map";
                 $stmt = $bdd->query($requete);
                 while ($donnees = $stmt->fetch(PDO::FETCH_ASSOC)):
-            
             ?>
-                                                    <tr> 
-                                                        
-                                                        <td><?php echo $donnees['map_ID']; ?></td>
+                                                    <tr>
                                                         <td><?php echo $donnees['map_nomlieu']; ?></td>
                                                         <td><?php echo $donnees['map_filtre']; ?></td>
                                                         <td><?php echo $donnees['map_longitude']; ?></td>
                                                         <td><?php echo $donnees['map_latitude']; ?></td>
                                                         <td class="d-flex justify-content-around">
-                                                             <!-- rajouter discord -->
+                                                            <?php echo "<a href=\"map-update.php?idmap={$donnees["map_ID"]}\">" ?> <i class="fas fa-pencil-alt btn-primary btn.circle btn-sm" title="Modifier"></i></a>
+                                                            <?php echo "<a href=\"map-delete.php?idmap={$donnees["map_ID"]}\">" ?> <i class="fas fa-trash btn-danger btn.circle btn-sm" title="Supprimer"></i></a>     
                                                         </td>
-
                                                     </tr>
                                                       <?php endwhile; ?>
                                                 </tbody>
@@ -118,7 +115,7 @@
                    
             </div>
             <!-- End of Main Content -->
-
+</div>
             <!-- Footer -->
             <?php
                 include("footer.php");

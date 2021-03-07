@@ -4,7 +4,7 @@
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.php">
                 <div class="sidebar-brand-text mx-3 ">
-                    <img src="./img/logo coloré et blanc.png">
+                    <img src="./img/logo-colore-et-blanc.png">
                 </div>
             </a>
 
@@ -90,7 +90,7 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item">
-                <a class="nav-link" href="index.php">
+                <a class="nav-link" href="map.php">
                     <img src="./img/icone-carte.png">
                     <span>Carte interactive</span>
                 </a>

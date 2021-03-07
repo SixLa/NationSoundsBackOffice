@@ -107,7 +107,7 @@ if (isset($_POST['envoyer'])) {
   {
       $req = "INSERT INTO info_map VALUES (NULL,:map_nomlieu,:map_filtre,:map_longitude,:map_latitude) ";
     require("connection.php");
-    $sth = $conn->prepare($req);
+    $sth = $bdd->prepare($req);
     $sth->bindValue(":map_nomlieu",$_POST['mapNom'],PDO::PARAM_STR);
     $sth->bindValue(":map_filtre",$_POST['mapFiltre'],PDO::PARAM_STR);
     $sth->bindValue(":map_longitude",$_POST['mapLong'],PDO::PARAM_STR);
@@ -115,7 +115,7 @@ if (isset($_POST['envoyer'])) {
     if ( $sth->execute() ) {
       echo "Le point d'intérêt a bien été ajouté";
     }
-    $conn = null;
+    $bdd = null;
   }
   else echo "Formulaire incomplet";
 }?>

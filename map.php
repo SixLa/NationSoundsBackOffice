@@ -59,12 +59,12 @@
                     <div class="row">
 
                         <!-- Content Column -->
-                        <div class="col-lg-6 mb-4">
+                        <div class="col-lg-12 mb-4">
 
                             <!-- Artistes -->
                             <div class="card shadow mb-4">
                                 <div class="card-header py-3 bg-dark-blue">
-                                    <h6 class="m-0 font-weight-bold text-white">Artistes</h6>
+                                    <h6 class="m-0 font-weight-bold text-white">Liste des points d'intérêts</h6>
                                 </div>
                                 <div class="card-body">
                                     <a rel="nofollow" href="tables.php">
@@ -82,83 +82,20 @@
                         <div class="col-lg-6 mb-4">
 
                             <!-- Actualités -->
-                            <div class="card shadow mb-4">
-                                <div class="card-header py-3 bg-dark-blue">
-                                    <h6 class="m-0 font-weight-bold text-white">Actualités</h6>
-                                </div>
-                                <div class="card-body">
-                                    <a rel="nofollow" href="index.php">
-                                        <div class="text-center">
-                                            <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="width: 25rem;"
-                                                src="img/undraw-actu.svg" alt="">
-                                        </div>
-                                        <p class="text-center">> Consulter et mettre à jour la liste des actualités </p>
-                                    </a>
-                                </div>
-                            </div>
+                            
 
                         </div>
-                    </div>
+                        <?php $requete = "SELECT map_ID , map_filtre, map_longitude, map_latitude FROM info_map";
+
+    require("connection.php");
+    echo($requete)
+?>
 
                     <!-- 2nd Row -->
                     <div class="row">
 
-                        <div class="col-xl-4 col-lg-6">
-
-                            <!-- Pages informatives -->
-                            <div class="card shadow mb-4">
-                                <div class="card-header py-3 bg-dark-blue">
-                                    <h6 class="m-0 font-weight-bold text-white">Pages informatives</h6>
-                                </div>
-                                <div class="card-body">
-                                    <a rel="nofollow" href="index.php">
-                                        <div class="text-center">
-                                            <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="width: 25rem;"
-                                                src="img/undraw-info.svg" alt="">
-                                        </div>
-                                        <p class="text-center">> Mettre à jour les pages informatives </p>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-xl-4 col-lg-6">
-
-                            <!-- Carte interactive -->
-                            <div class="card shadow mb-4">
-                                <div class="card-header py-3 bg-dark-blue">
-                                    <h6 class="m-0 font-weight-bold text-white">Carte interactive</h6>
-                                </div>
-                                <div class="card-body">
-                                    <a rel="nofollow" href="index.php">
-                                        <div class="text-center">
-                                            <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="width: 25rem;"
-                                                src="img/undraw-carte.svg" alt="">
-                                        </div>
-                                        <p class="text-center">> Consulter la liste des points d'intérêt </p>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
                         
-                        <div class="col-xl-4 col-lg-6">
-
-                            <!-- Utilisateurs -->
-                            <div class="card shadow mb-4">
-                                <div class="card-header py-3 bg-dark-blue">
-                                    <h6 class="m-0 font-weight-bold text-white">Utilisateurs</h6>
-                                </div>
-                                <div class="card-body">
-                                    <a rel="nofollow" href="index.php">
-                                        <div class="text-center">
-                                            <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="width: 25rem;"
-                                                src="img/undraw-user.svg" alt="">
-                                        </div>
-                                        <p class="text-center">> Consulter la liste des utilisateurs </p>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>                        
+                                        
                         
                     </div>
 

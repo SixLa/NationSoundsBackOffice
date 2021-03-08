@@ -99,7 +99,8 @@
                                                         <td><?php echo $donnees['map_latitude']; ?></td>
                                                         <td class="d-flex justify-content-around">
                                                             <?php echo "<a href=\"map-update.php?idmap={$donnees["map_ID"]}\">" ?> <i class="fas fa-pencil-alt btn-primary btn.circle btn-sm" title="Modifier"></i></a>
-                                                            <?php echo "<a href=\"map-delete.php?idmap={$donnees["map_ID"]}\">" ?> <i class="fas fa-trash btn-danger btn.circle btn-sm" title="Supprimer"></i></a>     
+                                                         
+                                                            <a href="map-delete.php?id=<?php echo $donnees["map_ID"]; ?>"><i class="fas fa-trash btn-danger btn.circle btn-sm" name ="delete" title="Supprimer"></i></a>     
                                                         </td>
                                                     </tr>
                                                       <?php endwhile; ?>

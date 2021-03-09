@@ -54,7 +54,7 @@
                     <!-- Page Heading -->
                     
                     <h1 class="h3 mb-2 text-white">Carte interactive</h1>
-                    <p class="mb-4 text-white"> Vous pouvez ici voir les différents points d'intérêts de la carte interactive.</p>
+                    <p class="mb-4 text-white"> Vous pouvez ici voir et modifier les différents points d'intérêts de la carte interactive.</p>
                     <a href="map-create.php" class="btn btn-primary btn-lg" role="button" aria-pressed="true">Ajouter un point</a>
          
                 <div class="card shadow mb-4">
@@ -98,9 +98,10 @@
                                                         <td><?php echo $donnees['map_longitude']; ?></td>
                                                         <td><?php echo $donnees['map_latitude']; ?></td>
                                                         <td class="d-flex justify-content-around">
-                                                            <?php echo "<a href=\"map-update.php?idmap={$donnees["map_ID"]}\">" ?> <i class="fas fa-pencil-alt btn-primary btn.circle btn-sm" title="Modifier"></i></a>
-                                                         
-                                                            <a href="map-delete.php?id=<?php echo $donnees["map_ID"]; ?>"><i class="fas fa-trash btn-danger btn.circle btn-sm" name ="delete" title="Supprimer"></i></a>     
+                                                          
+                                                        <?php echo "<a href=\"map-update.php?id={$donnees["map_ID"]}&nom={$donnees["map_nomlieu"]}&filtre={$donnees["map_filtre"]}&longitude={$donnees["map_longitude"]}&latitude={$donnees["map_latitude"]}\">" ?> <i class="fas fa-pencil-alt btn-primary btn.circle btn-sm" title="Modifier"></i></a>
+
+                                                        <a href="map-delete.php?id=<?php echo $donnees["map_ID"]; ?>"><i class="fas fa-trash btn-danger btn.circle btn-sm" name ="delete" title="Supprimer"></i></a>     
                                                         </td>
                                                     </tr>
                                                       <?php endwhile; ?>

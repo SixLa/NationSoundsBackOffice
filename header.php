@@ -4,7 +4,7 @@
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.php">
                 <div class="sidebar-brand-text mx-3 ">
-                    <img src="./img/logo coloré et blanc.png">
+                    <img src="./img/logo-colore-et-blanc.png">
                 </div>
             </a>
 
@@ -51,13 +51,13 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item">
-                <a class="nav-link" href="index.php">
+                <a class="nav-link" href="actus.php">
                     <img src="./img/icone-actu.png">
                     <span>Liste des actualités</span>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="index.php">
+                <a class="nav-link" href="actus-create.php">
                     <img src="./img/icone-add.png">
                     <span>Ajouter une actualité</span>
                 </a>

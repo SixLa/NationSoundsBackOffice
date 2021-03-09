@@ -87,7 +87,7 @@
                                     <h6 class="m-0 font-weight-bold text-white">Actualités</h6>
                                 </div>
                                 <div class="card-body">
-                                    <a rel="nofollow" href="index.php">
+                                    <a rel="nofollow" href="actus.php">
                                         <div class="text-center">
                                             <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="width: 25rem;"
                                                 src="img/undraw-actu.svg" alt="">

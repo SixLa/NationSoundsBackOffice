@@ -78,8 +78,8 @@
                                     </tfoot>
                                     <tbody>
                                         <?php
-                                            $requete = "SELECT news_id, news_nom, news_date, news_contenu FROM news";
-                                            require("connexion.php");
+                                            $requete = "SELECT news_ID, news_nom, news_date, news_contenu FROM news";
+                                            require("connection.php");
                                             $stmt = $bdd->query($requete);
                                             while($row = $stmt->fetch(PDO::FETCH_ASSOC)) :
                                         ?>
@@ -89,8 +89,8 @@
                                             <td><?php echo ($row[news_date]) ?></td>
                                             <td><?php echo ($row[news_contenu]) ?></td>
                                             <td class="d-flex justify-content-around">
-                                                <?php echo "<a href=\"actus-update.php?idnews={$row[news_id]}\">" ?> <i class="fas fa-pencil-alt btn-primary btn.circle btn-sm" title="Modifier"></i></a>
-                                                <?php echo "<a href=\"actus-delete.php?idnews={$row[news_id]}\">" ?> <i class="fas fa-trash btn-danger btn.circle btn-sm" name="delete" title="Supprimer"></i></a>
+                                                <?php echo "<a href=\"actus-update.php?ID={$row[news_ID]}&date={$row[news_date]}&nom={$row[news_nom]}&contenu={$row[news_contenu]}\">" ?> <i class="fas fa-pencil-alt btn-primary btn.circle btn-sm" title="Modifier"></i></a>
+                                                <a href="actus-delete.php?id=<?php echo $row[news_ID]; ?>"><i class="fas fa-trash btn-danger btn.circle btn-sm" name ="delete" title="Supprimer"></i></a>
                                             </td>
                                         </tr>
                                         <?php endwhile; ?>
@@ -99,7 +99,6 @@
                             </div>
                         </div>
                     </div>
-
                 </div>
                 <!-- /.container-fluid -->
 

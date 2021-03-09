@@ -1,15 +1,22 @@
 <?php
 // Connexion à la base de données
 include('connection.php');
-$actusID = $_GET['ID'];
-$actusNom = $_GET['nom'];
-$actusDate = $_GET['date'];
-$actusContenu = $_GET['contenu'];
+$mapID = $_GET['id'];
+$mapNom = $_GET['nom'];
+$mapFiltre = $_GET['filtre'];
+$mapLongitude = $_GET['longitude'];
+$mapLatitude = $_GET['latitude'];
 
-$postedID = $_POST['actusID'];
-$postedNom = addslashes($_POST['actusNom']);
-$postedDate = $_POST['actusDate'];
-$postedContenu = addslashes($_POST['actusContenu']);
+// $postedID = $_POST['mapID'];
+$postedID = isset($_POST['mapID']) ? $_POST['mapID'] : NULL;
+// $postedNom = addslashes($_POST['mapNom']);
+$postedNom = isset($_POST['mapNom']) ? $_POST['mapNom'] : NULL;
+// $postedFiltre = $_POST['mapFiltre'];
+$postedFiltre = isset($_POST['mapFiltre']) ? $_POST['mapFiltre'] : NULL;
+// $postedLongitude = $_POST['mapLongitude'];
+$postedLongitude = isset($_POST['mapLongitude']) ? $_POST['mapLongitude'] : NULL;
+// $postedLatitude = $_POST['mapLatitude'];
+$postedLatitude = isset($_POST['mapLatitude']) ? $_POST['mapLatitude'] : NULL;
 ?>
 
 <!DOCTYPE html>
@@ -66,7 +73,7 @@ $postedContenu = addslashes($_POST['actusContenu']);
             <div class="container-fluid">
 
                 <!-- Page Heading -->
-                <h1 class="h3 mb-2 text-white">Modifier une actualité</h1>
+                <h1 class="h3 mb-2 text-white">Modifier un point d'intérêt sur la carte</h1>
 
                 <!-- DataTales Example -->
                 <div class="card shadow mb-4">
@@ -76,23 +83,29 @@ $postedContenu = addslashes($_POST['actusContenu']);
                             <!-- Text input -->
                             <div class="form-outline mb-4">
                                 <label class="form-label" for="form6Example3">ID</label>
-                                <input type="text" name="actusID" value="<?php echo $actusID; ?>" id="form6Example3" class="form-control" />
+                                <input type="text" name="mapID" value="<?php echo $mapID; ?>" id="form6Example3" class="form-control" />
                             </div>
 
                             <div class="form-outline mb-4">
-                                <label class="form-label" for="form6Example3">Titre de l'actualité</label>
-                                <input type="text" name="actusNom" value="<?php echo $actusNom; ?>" id="form6Example3" class="form-control" />
+                                <label class="form-label" for="form6Example3">Nom du point d'intérêt</label>
+                                <input type="text" name="mapNom" value="<?php echo $mapNom; ?>" id="form6Example3" class="form-control" />
                             </div>
                             <!-- Text input -->
                             <div class="form-outline mb-4">
-                                <label class="form-label" for="form6Example3">Date de l'actualité</label>
-                                <input type="date" name="actusDate" value="<?php echo $actusDate; ?>" id="form6Example3" class="form-control" />
+                                <label class="form-label" for="form6Example3">Filtre correspondant</label>
+                                <input type="text" name="mapFiltre" value="<?php echo $mapFiltre; ?>" id="form6Example3" class="form-control" />
                             </div>
 
                             <!-- Message input -->
                             <div class="form-outline mb-4">
-                                <label class="form-label" for="form6Example7">Description de l'actualité</label>
-                                <input class="form-control" name="actusContenu" value="<?php echo $actusContenu; ?>" id="form6Example7" rows="4"></input>
+                                <label class="form-label" for="form6Example7">Longitude</label>
+                                <input class="form-control" name="mapLongitude" value="<?php echo $mapLongitude; ?>" id="form6Example7" rows="4"></input>
+                            </div>
+
+                                <!-- Message input -->
+                            <div class="form-outline mb-4">
+                                <label class="form-label" for="form6Example7">Latitude</label>
+                                <input class="form-control" name="mapLatitude" value="<?php echo $mapLatitude; ?>" id="form6Example7" rows="4"></input>
                             </div>
 
                             <!-- Submit button -->
@@ -100,18 +113,20 @@ $postedContenu = addslashes($_POST['actusContenu']);
                         </form>
 
                         <?php
-                        if ($_POST['submit']) {
-                            $requete = "UPDATE news SET news_date= :newDate, news_nom= :newNom, news_contenu= :newContenu WHERE news_ID= :newID ";
+                        if (isset($_POST["submit"])) {
+                            $requete = "UPDATE info_map SET map_nomlieu= :newNom, map_filtre= :newFiltre, map_longitude= :newLongitude, map_latitude= :newLatitude WHERE map_ID= :newID ";
 
                             $sth = $bdd->prepare($requete);
                             if ($sth->execute(array(
                                     'newID' => $postedID,
-                                    'newDate' => $postedDate,
                                     'newNom' => $postedNom,
-                                    'newContenu' => $postedContenu
+                                    'newFiltre' => $postedFiltre,
+                                    'newLongitude' => $postedLongitude,
+                                    'newLatitude' => $postedLatitude
                                     ))) {
-                        echo "La nouvelle actualité a bien été enregistrée.";
+                                echo "Le nouveau point d'intérêt a bien été enregistré.";
                             }
+                            
                             $bdd = null;
                         }
                         ?>
@@ -162,4 +177,3 @@ $postedContenu = addslashes($_POST['actusContenu']);
 </body>
 
 </html>
-

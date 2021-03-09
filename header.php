@@ -51,13 +51,13 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item">
-                <a class="nav-link" href="index.php">
+                <a class="nav-link" href="actus.php">
                     <img src="./img/icone-actu.png">
                     <span>Liste des actualités</span>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="index.php">
+                <a class="nav-link" href="actus-create.php">
                     <img src="./img/icone-add.png">
                     <span>Ajouter une actualité</span>
                 </a>

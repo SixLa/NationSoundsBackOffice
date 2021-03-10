@@ -52,7 +52,10 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-white">Actualités</h1>
+                    <div class="d-flex justify-content-between">
+                        <h1 class="h3 mb-2 text-white">Actualités</h1>
+                        <p class="text-right"><a href="actus-create.php" class="btn btn-primary btn-lg mb-3" role="button" aria-pressed="true">Ajouter une actualité</a></p>
+                    </div>
                     <p class="mb-4 text-white">Retrouvez et gérez toutes les actualités publiées sur l'application du festival.</p>
 
                     <!-- DataTales Example -->
@@ -90,7 +93,7 @@
                                             <td><?php echo ($row[news_contenu]) ?></td>
                                             <td class="d-flex justify-content-around">
                                                 <?php echo "<a href=\"actus-update.php?ID={$row[news_ID]}&date={$row[news_date]}&nom={$row[news_nom]}&contenu={$row[news_contenu]}\">" ?> <i class="fas fa-pencil-alt btn-primary btn.circle btn-sm" title="Modifier"></i></a>
-                                                <a href="actus-delete.php?id=<?php echo $row[news_ID]; ?>"><i class="fas fa-trash btn-danger btn.circle btn-sm" name ="delete" title="Supprimer"></i></a>
+                                                <a href="actus-delete.php?id=<?php echo $row[news_ID]; ?>" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette actualité ?')"><i class="fas fa-trash btn-danger btn.circle btn-sm" name ="delete" title="Supprimer"></i></a>
                                             </td>
                                         </tr>
                                         <?php endwhile; ?>

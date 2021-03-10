@@ -7,9 +7,9 @@ $actusDate = $_GET['date'];
 $actusContenu = $_GET['contenu'];
 
 $postedID = $_POST['actusID'];
-$postedNom = $_POST['actusNom'];
+$postedNom = addslashes($_POST['actusNom']);
 $postedDate = $_POST['actusDate'];
-$postedContenu = $_POST['actusContenu'];
+$postedContenu = addslashes($_POST['actusContenu']);
 ?>
 
 <!DOCTYPE html>
@@ -101,11 +101,16 @@ $postedContenu = $_POST['actusContenu'];
 
                         <?php
                         if ($_POST['submit']) {
-                            $requete = "UPDATE news SET news_date='$postedDate', news_nom='$postedNom', news_contenu='$postedContenu' WHERE news_ID='$postedID' ";
+                            $requete = "UPDATE news SET news_date= :newDate, news_nom= :newNom, news_contenu= :newContenu WHERE news_ID= :newID ";
 
                             $sth = $bdd->prepare($requete);
-                            if ($sth->execute()) {
-                                echo "La nouvelle actualité a bien été enregistrée.";
+                            if ($sth->execute(array(
+                                    'newID' => $postedID,
+                                    'newDate' => $postedDate,
+                                    'newNom' => $postedNom,
+                                    'newContenu' => $postedContenu
+                                    ))) {
+                        echo "La nouvelle actualité a bien été enregistrée.";
                             }
                             $bdd = null;
                         }

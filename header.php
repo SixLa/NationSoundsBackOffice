@@ -24,18 +24,40 @@
 
             <!-- Heading -->
             <div class="sidebar-heading">
+                Programme
+            </div>
+
+            <!-- Nav Item - Dashboard -->
+            <li class="nav-item">
+                <a class="nav-link" href="event.php">
+                    <img src="./img/icone-music.png">
+                    <span>Liste des événements</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="event-create.php">
+                    <img src="./img/icone-add.png">
+                    <span>Ajouter un événement</span>
+                </a>
+            </li>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider">
+
+            <!-- Heading -->
+            <div class="sidebar-heading">
                 Artistes
             </div>
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item">
-                <a class="nav-link" href="php/artistes/artistes.php">
+                <a class="nav-link" href="artistes.php">
                     <img src="./img/icone-music.png">
                     <span>Liste des artistes</span>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="index.php">
+                <a class="nav-link" href="artistes-create.php">
                     <img src="./img/icone-add.png">
                     <span>Ajouter un artiste</span>
                 </a>
@@ -73,13 +95,13 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item">
-                <a class="nav-link" href="index.php">
+                <a class="nav-link" href="infos.php">
                     <img src="./img/icone-info.png">
                     <span>Infos pratiques</span>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="index.php">
+                <a class="nav-link" href="faq.php">
                     <img src="./img/icone-info.png">
                     <span>FAQ</span>
                 </a>

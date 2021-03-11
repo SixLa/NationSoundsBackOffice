@@ -26,7 +26,6 @@ function updateArtistes($id, $nom, $descrip){
 	$requestEnvoi = $bdd->prepare('UPDATE artistes SET artistes_nom = :array_nom, artistes_description = :array_desc WHERE artistes_ID = :array_id');
 	$requestEnvoi->execute(array('array_id' => $id, ':array_nom' => $nom, ':array_desc' => $descrip));
 	$bdd = NULL;
-
 }
 
 function deleteArtiste($id){

@@ -103,11 +103,11 @@
                                 $sth->bindValue(":news_nom",$_POST['actuNom'],PDO::PARAM_STR);
                                 $sth->bindValue(":news_contenu",$_POST['actuContenu'],PDO::PARAM_STR);
                                 if ($sth->execute()) {
-                                    echo "La nouvelle actualité a bien été enregistrée.";
+                                    echo "<p class='text-success'>La nouvelle actualité a bien été enregistrée.</p>";
                                 }
                                 $bdd = null;
                             }
-                            else echo "Veuillez remplir tous les champs du formulaire.";
+                            else echo "<p class='text-danger'>Veuillez remplir tous les champs du formulaire.</p>";
                         }
                         ?>
 

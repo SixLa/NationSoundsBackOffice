@@ -99,7 +99,7 @@ $postedContenu = $_POST['infosContenu'];
                                 $requete = "UPDATE infos SET infos_nom='$postedNom', infos_contenu='$postedContenu' WHERE infos_ID='$postedID' ";
                                 $sth = $bdd->prepare($requete);
                                 if ($sth->execute()) {
-                                    echo "Infos mises à jour.";
+                                    echo "<p class='text-success'>Les informations pratiques ont bien été modifiées.</p>";
                                 }
                                 $bdd = null;
                             }

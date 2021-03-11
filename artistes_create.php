@@ -85,10 +85,10 @@
                         
                         if(isset($_POST['create'])){
                             if(empty($_POST['name']) || empty($_POST['desc'])){
-                                $message = "echec a la creation"; 
+                                $message = "<p class='text-danger'>Veuillez remplir tous les champs du formulaire.</p>";;
                             }else{
                              ajoutArtistes($_POST['name'], $_POST['desc']);
-                             $message ="création réussi";
+                             $message ="<p class='text-success'>Le nouvel artiste a bien été créé.</p>";;
                             }
                             echo $message;
                          }       

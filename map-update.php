@@ -124,7 +124,7 @@ $postedLatitude = isset($_POST['mapLatitude']) ? $_POST['mapLatitude'] : NULL;
                                     'newLongitude' => $postedLongitude,
                                     'newLatitude' => $postedLatitude
                                     ))) {
-                                echo "Le nouveau point d'intérêt a bien été enregistré.";
+                                echo "<p class='text-success'>Le point d'intérêt a bien été modifié.</p>";
                             }
                             
                             $bdd = null;

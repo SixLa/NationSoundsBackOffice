@@ -93,10 +93,10 @@
                         <?php
                         if(isset($_POST['update'])){
                             if(empty($_POST['name']) || empty($_POST['desc'])){
-                                $message = "echec update";
+                                $message = "<p class='text-danger'>Veuillez remplir tous les champs du formulaire.</p>";
                             }else{
                                 updateArtistes($id,$_POST['name'], $_POST['desc']);
-                                $message ="update réussi";
+                                $message ="<p class='text-success'>L'artiste a bien été modifié.</p>";
                             }
                             echo $message;
                          }        

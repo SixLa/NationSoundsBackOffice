@@ -56,10 +56,11 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-white">Tables</h1>
-                    <p class="mb-4 text-white">DataTables is a third party plugin that is used to generate the demo table below.
-                        For more information about DataTables, please visit the <a class="text-white" target="_blank"
-                            href="https://datatables.net">official DataTables documentation</a>.</p>
+                    <div class="d-flex justify-content-between">
+                        <h1 class="h3 mb-2 text-white">Artistes</h1>
+                        <p class="text-right"><a href="artistes_create.php" class="btn btn-primary btn-lg mb-3" role="button" aria-pressed="true">Ajouter un artiste</a></p>
+                    </div>
+                    <p class="mb-4 text-white">Retrouvez et gérez tous les artistes présents lors du festival.</p>
 
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
@@ -93,7 +94,7 @@
 
                                             <td class="d-flex justify-content-around">
                                                 <a href="artistes_update.php?id=<?php echo $artiste[0]; ?>"><i class="fas fa-pencil-alt btn-primary btn.circle btn-sm" title="Modifier"></i></a>
-                                                <a href="delete_artiste.php?id=<?php echo $artiste[0] ; ?>"onclick="return confirm('Etes-vous sûr ?');"><i class="fas fa-trash btn-danger btn.circle btn-sm" name ="delete" title="Supprimer"></i></a>
+                                                <a href="delete_artiste.php?id=<?php echo $artiste[0] ; ?>"onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet artiste ?');"><i class="fas fa-trash btn-danger btn.circle btn-sm" name ="delete" title="Supprimer"></i></a>
                                             </td>
                                         </tr>
                                         <?php 

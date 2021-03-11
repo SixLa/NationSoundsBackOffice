@@ -57,7 +57,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="artistes-create.php">
+                <a class="nav-link" href="artistes_create.php">
                     <img src="./img/icone-add.png">
                     <span>Ajouter un artiste</span>
                 </a>

@@ -4,10 +4,6 @@ include('connection.php');
 $infosID = $_GET['ID'];
 $infosNom = $_GET['nom'];
 $infosContenu = $_GET['contenu'];
-
-$postedID = $_POST['infosID'];
-$postedNom = $_POST['infosNom'];
-$postedContenu = $_POST['infosContenu'];
 ?>
 
 <!DOCTYPE html>
@@ -75,11 +71,6 @@ $postedContenu = $_POST['infosContenu'];
                                 
                                 <!-- Text input -->
                             <div class="form-outline mb-4">
-                                <label class="form-label" for="form6Example3">ID :</label>
-                                <input type="text" name="infosID" value="<?php echo $infosID; ?>" id="form6Example3" class="form-control" />
-                            </div>
-
-                            <div class="form-outline mb-4">
                                 <label class="form-label" for="form6Example3">Titre :</label>
                                 <input type="text" name="infosNom" value="<?php echo $infosNom; ?>" id="form6Example3" class="form-control" />
                             </div>
@@ -95,16 +86,29 @@ $postedContenu = $_POST['infosContenu'];
                             </form>
 
                             <?php
-                            if ($_POST['submit']) {
-                                $requete = "UPDATE infos SET infos_nom='$postedNom', infos_contenu='$postedContenu' WHERE infos_ID='$postedID' ";
-                                $sth = $bdd->prepare($requete);
-                                if ($sth->execute()) {
-                                    echo "Infos mises à jour.";
-                                }
-                                $bdd = null;
+                        // Fonction update des actualités
+                        function updateInfos($infosID, $infosNom,  $infosContenu){
+                            require("connection.php");
+                            $requete = "UPDATE infos SET infos_nom= :infosNom, infos_contenu= :infosContenu WHERE infos_ID= :infosID ";
+                            $sth = $bdd->prepare($requete);
+                            $sth->execute(array(
+                                'infosID' => $infosID,
+                                'infosNom' => $infosNom,
+                                'infosContenu' => $infosContenu
+                            ));
+                            $bdd = null;
+                        }
+                        // Lorsque l'utilisateur clique sur le bouton submit et si les champs ne sont pas vides
+                        if (isset($_POST['submit'])) {
+                            if (empty($_POST['infosNom']) || empty($_POST['infosContenu'])) {
+                                $message = "<p class='text-danger'>Veuillez remplir tous les champs du formulaire.</p>";
+                            } else {
+                                updateInfos($infosID, $_POST['infosNom'], $_POST['infosContenu']);
+                                $message = "<p class='text-success'>Les informations ont bien été modifiées.</p>";
                             }
-                            ?>
-
+                            echo $message;
+                        }
+                        ?>
                         </div>
                     </div>
 

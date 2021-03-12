@@ -123,7 +123,7 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item">
-                <a class="nav-link" href="index.php">
+                <a class="nav-link" href="user.php">
                     <img src="./img/icone-user.png">
                     <span>Utilisateurs</span>
                 </a>

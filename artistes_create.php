@@ -1,11 +1,3 @@
-<?php
-// Connexion à la base de données
-include('connection.php');
-$infosID = $_GET['ID'];
-$infosNom = $_GET['nom'];
-$infosContenu = $_GET['contenu'];
-?>
-
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -30,6 +22,8 @@ $infosContenu = $_GET['contenu'];
 
     <!-- Custom styles for this page -->
     <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+
+    <?php include ('artistes_function.php'); ?>
 
 </head>
 
@@ -60,56 +54,46 @@ $infosContenu = $_GET['contenu'];
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-white">Modifications</h1>
-                    <p class="mb-4 text-white"></p>
+                    <h1 class="h3 mb-2 text-white">Création d'un artiste</h1>
+                    <p class="mb-4 text-white">Entrez ici les informations liées a l'artiste que vous voulez créer.</p>
 
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-body">
-                            
-                        <form action="" method="POST">
-                                
-                                <!-- Text input -->
-                            <div class="form-outline mb-4">
-                                <label class="form-label" for="form6Example3">Titre :</label>
-                                <input type="text" name="infosNom" value="<?php echo $infosNom; ?>" id="form6Example3" class="form-control" />
-                            </div>
+                            <form action="" method="post">
+                                <!-- 2 column grid layout with text inputs for the first and last names -->
+                                <div class="row mb-4">
+                                    <div class="col">
+                                    <div class="form-outline">
+                                        <label class="form-label" for="form6Example1">Nom de l'artiste</label>
+                                        <input type="text" id="name" name="name" class="form-control" />
+                                    </div>
+                                    </div>
+                                    
+                                </div>
 
-                            <!-- Message input -->
-                            <div class="form-outline mb-4">
-                                <label class="form-label" for="form6Example7">Contenu :</label>
-                                <textarea class="form-control" name="infosContenu" id="form6Example7" rows="4" ><?php echo $infosContenu; ?></textarea>
-                            </div>
+                                <!-- Message input -->
+                                <div class="form-outline mb-4">
+                                    <label class="form-label" for="form6Example7">Description de l'artiste</label>
+                                    <textarea class="form-control" name ="desc" id="desc" rows="4"></textarea>
+                                </div>
 
                                 <!-- Submit button -->
-                                <input type="submit" name="submit" class="col-lg-3 btn btn-primary btn-block mb-4 float-right" value="Enregistrer" />
+                                <button type="submit" name="create" class="col-lg-3 btn btn-primary btn-block mb-4 float-right">Enregistrer</button>
                             </form>
-
-                            <?php
-
-                        // Fonction update 
-                        function updateInfos($infosID, $infosNom,  $infosContenu){
-                            require("connection.php");
-                            $requete = "UPDATE infos SET infos_nom= :infosNom, infos_contenu= :infosContenu WHERE infos_ID= :infosID ";
-                            $sth = $bdd->prepare($requete);
-                            $sth->execute(array(
-                                'infosID' => $infosID,
-                                'infosNom' => $infosNom,
-                                'infosContenu' => $infosContenu
-                            ));
-                            $bdd = null;
-                        }
-                        // Lorsque l'utilisateur clique sur le bouton submit et si les champs ne sont pas vides
-                        if (isset($_POST['submit'])) {
-                            if (empty($_POST['infosNom']) || empty($_POST['infosContenu'])) {
-                                $message = "<p class='text-danger'>Veuillez remplir tous les champs du formulaire.</p>";
-                            } else {
-                                updateInfos($infosID, $_POST['infosNom'], $_POST['infosContenu']);
-                                $message = "<p class='text-success'>Les informations ont bien été modifiées.</p>";
+                        <?php
+                        
+                        if(isset($_POST['create'])){
+                            if(empty($_POST['name']) || empty($_POST['desc'])){
+                                $message = "<p class='text-danger'>Veuillez remplir tous les champs du formulaire.</p>";;
+                            }else{
+                             ajoutArtistes($_POST['name'], $_POST['desc']);
+                             $message ="<p class='text-success'>Le nouvel artiste a bien été créé.</p>";;
                             }
                             echo $message;
-                        }
-                        ?>
+                         }       
+                            ?>
+
                         </div>
                     </div>
 

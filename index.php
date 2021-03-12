@@ -61,18 +61,18 @@
                         <!-- Content Column -->
                         <div class="col-lg-6 mb-4">
 
-                            <!-- Artistes -->
+                            <!-- Programme -->
                             <div class="card shadow mb-4">
                                 <div class="card-header py-3 bg-dark-blue">
-                                    <h6 class="m-0 font-weight-bold text-white">Artistes</h6>
+                                    <h6 class="m-0 font-weight-bold text-white">Programme du festival</h6>
                                 </div>
                                 <div class="card-body">
-                                    <a rel="nofollow" href="tables.php">
+                                    <a rel="nofollow" href="event.php">
                                         <div class="text-center">
                                             <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="width: 25rem;"
                                                 src="img/undraw-music.svg" alt="">
                                         </div>
-                                        <p class="text-center">> Consulter et mettre à jour la liste des artistes </p>
+                                        <p class="text-center">> Consulter et mettre à jour le programme </p>
                                     </a>
                                 </div>
                             </div>
@@ -84,15 +84,15 @@
                             <!-- Actualités -->
                             <div class="card shadow mb-4">
                                 <div class="card-header py-3 bg-dark-blue">
-                                    <h6 class="m-0 font-weight-bold text-white">Actualités</h6>
+                                    <h6 class="m-0 font-weight-bold text-white">Artistes</h6>
                                 </div>
                                 <div class="card-body">
-                                    <a rel="nofollow" href="actus.php">
+                                    <a rel="nofollow" href="artistes.php">
                                         <div class="text-center">
                                             <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="width: 25rem;"
-                                                src="img/undraw-actu.svg" alt="">
+                                                src="img/undraw_prog.svg" alt="">
                                         </div>
-                                        <p class="text-center">> Consulter et mettre à jour la liste des actualités </p>
+                                        <p class="text-center">> Consulter et mettre à jour la liste des artistes </p>
                                     </a>
                                 </div>
                             </div>
@@ -105,18 +105,18 @@
 
                         <div class="col-xl-4 col-lg-6">
 
-                            <!-- Pages informatives -->
+                            <!-- Actualités -->
                             <div class="card shadow mb-4">
                                 <div class="card-header py-3 bg-dark-blue">
-                                    <h6 class="m-0 font-weight-bold text-white">Pages informatives</h6>
+                                    <h6 class="m-0 font-weight-bold text-white">Actualités</h6>
                                 </div>
                                 <div class="card-body">
-                                    <a rel="nofollow" href="index.php">
+                                    <a rel="nofollow" href="actus.php">
                                         <div class="text-center">
                                             <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="width: 25rem;"
-                                                src="img/undraw-info.svg" alt="">
+                                                src="img/undraw-actu.svg" alt="">
                                         </div>
-                                        <p class="text-center">> Mettre à jour les pages informatives </p>
+                                        <p class="text-center">> Consulter et mettre à jour les actualités </p>
                                     </a>
                                 </div>
                             </div>
@@ -130,7 +130,7 @@
                                     <h6 class="m-0 font-weight-bold text-white">Carte interactive</h6>
                                 </div>
                                 <div class="card-body">
-                                    <a rel="nofollow" href="index.php">
+                                    <a rel="nofollow" href="map.php">
                                         <div class="text-center">
                                             <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="width: 25rem;"
                                                 src="img/undraw-carte.svg" alt="">

@@ -33,7 +33,6 @@
         $desc = $a[1];
     }
     ?>
-
 </head>
 
 <body id="page-top">
@@ -69,6 +68,21 @@
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-body">
+                        <?php
+                        if(isset($_POST['update'])){
+                            if(empty($_POST['name']) || empty($_POST['desc'])){
+                                $message = "echec update";
+                            }else{
+                                updateArtistes($id,$_POST['name'], $_POST['desc']);
+                                $message ="update réussi";
+                                debug_to_console("check");
+                                $nom = $_POST['name'];
+                                $desc = $_POST['desc'];
+                            }
+                           
+                         }        
+                            ?>
+
                             <form action="" method="post">
                                 <!-- 2 column grid layout with text inputs for the first and last names -->
                                 <div class="row mb-4">
@@ -90,17 +104,11 @@
                                 <!-- Submit button -->
                                 <button type="submit" name="update" class="col-lg-3 btn btn-primary btn-block mb-4 float-right">Enregistrer</button>
                             </form>
-                        <?php
-                        if(isset($_POST['update'])){
-                            if(empty($_POST['name']) || empty($_POST['desc'])){
-                                $message = "echec update";
-                            }else{
-                                updateArtistes($id,$_POST['name'], $_POST['desc']);
-                                $message ="update réussi";
-                            }
-                            echo $message;
-                         }        
-                            ?>
+
+                        <?php  
+                        if(isset($message)) 
+                            echo $message;  ?>
+
 
                         </div>
                     </div>

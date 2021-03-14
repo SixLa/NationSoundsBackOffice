@@ -54,8 +54,8 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-white">Création d'un evenement</h1>
-                    <p class="mb-4 text-white">Entrez ici les informations liées a l'evenement que vous voulez créer.</p>
+                    <h1 class="h3 mb-2 text-white">Création d'un événement</h1>
+                    <p class="mb-4 text-white">Entrez ici les informations liées à l'événement que vous voulez créer.</p>
 
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
@@ -82,7 +82,7 @@
                                 <div class="row mb-4">
                                     <div class="col">
                                     <div class="form-outline">
-                                        <label class="form-label" for="form6Example1">Description evenement</label>
+                                        <label class="form-label" for="form6Example1">Description de l'événement</label>
                                         <input type="text" id="desc" name="desc" class="form-control" />
                                     </div>
                                     </div>
@@ -109,7 +109,7 @@
                                 $message = "<p class='text-danger'>Veuillez remplir tous les champs du formulaire.</p>";;
                             }else{
                                 createEvent($_POST['time'], $_POST['scene'], $_POST['desc']);
-                             $message ="<p class='text-success'>Le nouvel evenement a bien été créé.</p>";;
+                             $message ="<p class='text-success'>Le nouvel événement a bien été créé.</p>";;
                             }
                             echo $message;
                          }       

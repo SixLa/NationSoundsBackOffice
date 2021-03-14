@@ -1,3 +1,13 @@
+<?php
+
+session_start();
+// Vérifiez si l'utilisateur est connecté, sinon redirigez-le vers la page de connexion
+if(!isset($_SESSION["email"]))
+{
+    header("Location: login.php");
+    exit();
+}
+?>
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -67,7 +77,7 @@
                                     <h6 class="m-0 font-weight-bold text-white">Programme du festival</h6>
                                 </div>
                                 <div class="card-body">
-                                    <a rel="nofollow" href="event.php">
+                                    <a rel="nofollow" href="programme.php">
                                         <div class="text-center">
                                             <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="width: 25rem;"
                                                 src="img/undraw-music.svg" alt="">

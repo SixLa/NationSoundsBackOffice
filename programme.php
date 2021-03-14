@@ -57,10 +57,10 @@
 
                     <!-- Page Heading -->
                     <div class="d-flex justify-content-between">
-                        <h1 class="h3 mb-2 text-white">Evenement</h1>
+                        <h1 class="h3 mb-2 text-white">Evénements</h1>
                         <p class="text-right"><a href="programme_create.php" class="btn btn-primary btn-lg mb-3" role="button" aria-pressed="true">Créer un evenement</a></p>
                     </div>
-                    <p class="mb-4 text-white">Retrouvez tout les évenements et gérer les artistes y participant.</p>
+                    <p class="mb-4 text-white">Retrouvez tous les événements et gérez les artistes y participant.</p>
 
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
@@ -70,8 +70,8 @@
                                     <thead>
                                         <tr>
                                             <th>Date</th>
-                                            <th>Scene</th>
-                                            <th>Participant</th>
+                                            <th>Scène</th>
+                                            <th>Participants</th>
                                             <th>Description</th>
                                             <th>Actions</th>
                                         </tr>

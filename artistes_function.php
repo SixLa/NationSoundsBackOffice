@@ -1,6 +1,4 @@
 <?php 
-	
-
 	Function getArtiste($id){
 		require("connection.php");
 		$request = $bdd->prepare('SELECT artistes_nom, artistes_description FROM artistes WHERE artistes_ID = :array_id');
@@ -13,7 +11,7 @@
 	}
 
 	function ajoutArtistes($nom, $descrip){
-		require("connection.php");
+	require("connection.php");
 	$requestEnvoi = $bdd->prepare('INSERT INTO artistes(artistes_nom, artistes_description, artistes_photo) VALUES(:array_nom , :array_desc, "")');
 	$requestEnvoi->execute(array(':array_nom' => $nom, ':array_desc' => $descrip));
 
@@ -56,8 +54,5 @@ function debug_to_console($data) {
 
     echo "<script>console.log('Debug Objects: " . $output . "' );</script>";
 }
-
-
-
 
  ?>

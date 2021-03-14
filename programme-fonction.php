@@ -79,6 +79,14 @@ function deleteEvent($id){
 
 }
 
+function deleteParticipeFromEvent($id){
+    require("connection.php");
+	$request = $bdd->prepare('DELETE FROM participe WHERE fk_event_ID = :array_id');
+	$request->execute(array(':array_id' => $id));
+
+    $bdd = NULL;
+}
+
 function deleteParticipe($id){
     require("connection.php");
 	$request = $bdd->prepare('DELETE FROM participe WHERE participe = :array_id');

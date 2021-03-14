@@ -29,13 +29,13 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item">
-                <a class="nav-link" href="event.php">
+                <a class="nav-link" href="programme.php">
                     <img src="./img/icone-music.png">
                     <span>Liste des événements</span>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="event-create.php">
+                <a class="nav-link" href="programme_create.php">
                     <img src="./img/icone-add.png">
                     <span>Ajouter un événement</span>
                 </a>

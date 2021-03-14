@@ -13,12 +13,12 @@
         <li class="nav-item dropdown no-arrow">
             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <span class="mr-2 d-none d-lg-inline text-white small">Douglas McGee</span>
+                <span class="mr-2 d-none d-lg-inline text-white small"><?php  echo  $_SESSION['email'] ?></span>
             </a>
         </li>
         <div class="topbar-divider d-none d-sm-block"></div>
         <li class="nav-item dropdown no-arrow">
-            <a class="nav-link dropdown-toggle" href="#" data-toggle="modal" data-target="#logoutModal">
+            <a class="nav-link dropdown-toggle" href="logout.php" data-toggle="modal" data-target="#logoutModal">
                 <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-white"></i>Déconnexion</a>
             </a>
         </li>
@@ -42,7 +42,7 @@
                 <div class="modal-body">Cliquez sur "Déconnecter" si vous souhaitez arrêter votre session.</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Annuler</button>
-                    <a class="btn btn-primary" href="login.html">Déconnecter</a>
+                    <a class="btn btn-primary" href="login.php">Déconnecter</a>
                 </div>
             </div>
         </div>

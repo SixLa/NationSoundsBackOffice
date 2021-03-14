@@ -34,6 +34,9 @@
          $lieu = $a[2];
          $desc = $a[3];
      }
+
+    $date = strtotime($date);
+    $newDate = date('Y-m-d\TH:i', $date);
     
     ?>
 
@@ -107,7 +110,7 @@
                                     <div class="col">
                                     <div class="form-outline">
                                         <label class="form-label" for="form6Example1">horaire</label>
-                                        <input type="datetime-local" id="time" name="time" value ="<?php echo $date ?>" class="form-control" />
+                                        <input type="datetime-local" id="time" name="time" value ="<?php echo $newDate ?>" class="form-control" />
                                     </div>
                                     </div>
                                     

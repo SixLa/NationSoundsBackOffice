@@ -58,7 +58,7 @@
                     <!-- Page Heading -->
                     <div class="d-flex justify-content-between">
                         <h1 class="h3 mb-2 text-white">Evénements</h1>
-                        <p class="text-right"><a href="programme_create.php" class="btn btn-primary btn-lg mb-3" role="button" aria-pressed="true">Créer un evenement</a></p>
+                        <p class="text-right"><a href="programme_create.php" class="btn btn-primary btn-lg mb-3" role="button" aria-pressed="true">Créer un nouvel événement</a></p>
                     </div>
                     <p class="mb-4 text-white">Retrouvez tous les événements et gérez les artistes y participant.</p>
 
@@ -71,8 +71,8 @@
                                         <tr>
                                             <th>Date</th>
                                             <th>Scène</th>
-                                            <th>Participants</th>
-                                            <th>Description</th>
+                                            <th>Artistes</th>
+                                            <th>Type</th>
                                             <th>Actions</th>
                                         </tr>
                                     </thead>
@@ -90,7 +90,7 @@
 
                                             <td class="d-flex justify-content-around">
                                                 <a href="artistes_update.php?id=<?php echo $artiste[0]; ?>"><i class="fas fa-pencil-alt btn-primary btn.circle btn-sm" title="Modifier"></i></a>
-                                                <a href="delete_artiste.php?id=<?php echo $artiste[0] ; ?>"onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet artiste ?');"><i class="fas fa-trash btn-danger btn.circle btn-sm" name ="delete" title="Supprimer"></i></a>
+                                                <a href="delete_artiste.php?id=<?php echo $artiste[0] ; ?>"onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet événement ?');"><i class="fas fa-trash btn-danger btn.circle btn-sm" name ="delete" title="Supprimer"></i></a>
                                             </td>
                                         </tr>
                                         <?php 

@@ -66,7 +66,35 @@ $infosContenu = $_GET['contenu'];
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-body">
-                        <form action="" method="POST">
+
+                            <?php
+
+                            // Fonction update
+                            function updateInfos($infosID, $infosNom,  $infosContenu){
+                                require("connection.php");
+                                $requete = "UPDATE infos SET infos_nom= :infosNom, infos_contenu= :infosContenu WHERE infos_ID= :infosID ";
+                                $sth = $bdd->prepare($requete);
+                                $sth->execute(array(
+                                    'infosID' => $infosID,
+                                    'infosNom' => $infosNom,
+                                    'infosContenu' => $infosContenu
+                                ));
+                                $bdd = null;
+                            }
+                            // Lorsque l'utilisateur clique sur le bouton submit et si les champs ne sont pas vides
+                            if (isset($_POST['submit'])) {
+                                if (empty($_POST['infosNom']) || empty($_POST['infosContenu'])) {
+                                    $message = "<p class='text-danger'>Veuillez remplir tous les champs du formulaire.</p>";
+                                } else {
+                                    updateInfos($infosID, $_POST['infosNom'], $_POST['infosContenu']);
+                                    $message = "<p class='text-success'>Les informations ont bien été modifiées.</p>";
+                                    $infosNom = $_POST['infosNom'];
+                                    $infosContenu = $_POST['infosContenu'];
+                                }
+                            }
+                            ?>
+
+                            <form action="" method="POST">
                                 
                                 <!-- Text input -->
                             <div class="form-outline mb-4">
@@ -90,30 +118,8 @@ $infosContenu = $_GET['contenu'];
                             </form>
 
                             <?php
-
-                        // Fonction update
-                        function updateInfos($infosID, $infosNom,  $infosContenu){
-                            require("connection.php");
-                            $requete = "UPDATE infos SET infos_nom= :infosNom, infos_contenu= :infosContenu WHERE infos_ID= :infosID ";
-                            $sth = $bdd->prepare($requete);
-                            $sth->execute(array(
-                                'infosID' => $infosID,
-                                'infosNom' => $infosNom,
-                                'infosContenu' => $infosContenu
-                            ));
-                            $bdd = null;
-                        }
-                        // Lorsque l'utilisateur clique sur le bouton submit et si les champs ne sont pas vides
-                        if (isset($_POST['submit'])) {
-                            if (empty($_POST['infosNom']) || empty($_POST['infosContenu'])) {
-                                $message = "<p class='text-danger'>Veuillez remplir tous les champs du formulaire.</p>";
-                            } else {
-                                updateInfos($infosID, $_POST['infosNom'], $_POST['infosContenu']);
-                                $message = "<p class='text-success'>Les informations ont bien été modifiées.</p>";
-                            }
-                            echo $message;
-                        }
-                        ?>
+                            if(isset($message))
+                                echo $message;  ?>
 
                         </div>
                     </div>

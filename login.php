@@ -73,8 +73,6 @@
                                 require("connection.php");
 
                                 if (isset($_POST['connexion'])) {
-
-
                                     if (($_SESSION["email"] == "") or ($_SESSION['password'] == "")) {
                                         echo "veuillez saisir un login et un mot de passe";
                                     } else {

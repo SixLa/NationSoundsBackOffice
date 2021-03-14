@@ -63,12 +63,26 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-white">Update d'un artiste</h1>
-                    <p class="mb-4 text-white">Entrez ici les informations liées a l'artiste que vous voulez update.</p>
+                    <h1 class="h3 mb-2 text-white">Mettre à jour la fiche d'un artiste</h1>
+                    <p class="mb-4 text-white">Entrez ici les informations liées à l'artiste que vous voulez modifier.</p>
 
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-body">
+
+                            <?php
+                            if(isset($_POST['update'])){
+                                if(empty($_POST['name']) || empty($_POST['desc'])){
+                                    $message = "<p class='text-danger'>Veuillez remplir tous les champs du formulaire.</p>";
+                                }else{
+                                    updateArtistes($id,$_POST['name'], $_POST['desc']);
+                                    $message ="<p class='text-success'>L'artiste a bien été modifié.</p>";
+                                    $nom = $_POST['name'];
+                                    $desc = $_POST['desc'];
+                                }
+                            }
+                            ?>
+
                             <form action="" method="post">
                                 <!-- 2 column grid layout with text inputs for the first and last names -->
                                 <div class="row mb-4">
@@ -90,17 +104,10 @@
                                 <!-- Submit button -->
                                 <button type="submit" name="update" class="col-lg-3 btn btn-primary btn-block mb-4 float-right">Enregistrer</button>
                             </form>
-                        <?php
-                        if(isset($_POST['update'])){
-                            if(empty($_POST['name']) || empty($_POST['desc'])){
-                                $message = "<p class='text-danger'>Veuillez remplir tous les champs du formulaire.</p>";
-                            }else{
-                                updateArtistes($id,$_POST['name'], $_POST['desc']);
-                                $message ="<p class='text-success'>L'artiste a bien été modifié.</p>";
-                            }
-                            echo $message;
-                         }        
-                            ?>
+
+                            <?php
+                            if(isset($message))
+                                echo $message;  ?>
 
                         </div>
                     </div>

@@ -67,6 +67,38 @@ $adminPermission = $_GET['permission'];
                 <!-- DataTales Example -->
                 <div class="card shadow mb-4">
                     <div class="card-body">
+
+                        <?php
+
+                        // Fonction update des utilisateurs
+                        function updateUser($adminID, $adminEmail, $adminPassword, $adminPseudo, $adminPermission){
+                            require("connection.php");
+                            $requete = "UPDATE utilisateurs SET admin_email= :adminEmail, admin_password= :adminPassword, admin_pseudo= :adminPseudo, admin_permission= :adminPermission WHERE admin_ID= :adminID ";
+                            $sth = $bdd->prepare($requete);
+                            $sth->execute(array(
+                                'adminID' => $adminID,
+                                'adminEmail' => $adminEmail,
+                                'adminPassword' => $adminPassword,
+                                'adminPseudo' => $adminPseudo,
+                                'adminPermission' => $adminPermission
+                            ));
+                            $bdd = null;
+                        }
+                        // Lorsque l'utilisateur clique sur le bouton submit et si les champs ne sont pas vides
+                        if (isset($_POST['submit'])) {
+                            if (empty($_POST['adminEmail']) || empty($_POST['adminPassword']) || empty($_POST['adminPseudo']) || empty($_POST['adminPermission'])) {
+                                $message = "<p class='text-danger'>Veuillez remplir tous les champs du formulaire.</p>";
+                            } else {
+                                updateUser($adminID, $_POST['adminEmail'], $_POST['adminPassword'], $_POST['adminPseudo'], $_POST['adminPermission']);
+                                $message = "<p class='text-success'>Le rôle a bien été modifié.</p>";
+                                $adminEmail = $_POST['adminEmail'];
+                                $adminPassword = $_POST['adminPassword'];
+                                $adminPseudo = $_POST['adminPseudo'];
+                                $adminPermission = $_POST['adminPermission'];
+                            }
+                        }
+                        ?>
+
                         <form action="" method="POST">
 
                             <!-- Text input -->
@@ -103,32 +135,8 @@ $adminPermission = $_GET['permission'];
                         </form>
 
                         <?php
-                
-                        // Fonction update des utilisateurs
-                        function updateUser($adminID, $adminEmail, $adminPassword, $adminPseudo, $adminPermission){
-                            require("connection.php");
-                            $requete = "UPDATE utilisateurs SET admin_email= :adminEmail, admin_password= :adminPassword, admin_pseudo= :adminPseudo, admin_permission= :adminPermission WHERE admin_ID= :adminID ";
-                            $sth = $bdd->prepare($requete);
-                            $sth->execute(array(
-                                'adminID' => $adminID,
-                                'adminEmail' => $adminEmail,
-                                'adminPassword' => $adminPassword,
-                                'adminPseudo' => $adminPseudo,
-                                'adminPermission' => $adminPermission
-                            ));
-                            $bdd = null;
-                        }
-                        // Lorsque l'utilisateur clique sur le bouton submit et si les champs ne sont pas vides
-                        if (isset($_POST['submit'])) {
-                         if (empty($_POST['adminEmail']) || empty($_POST['adminPassword']) || empty($_POST['adminPseudo']) || empty($_POST['adminPermission'])) {
-                                $message = "<p class='text-danger'>Veuillez remplir tous les champs du formulaire.</p>";
-                            } else {
-                                updateUser($adminID, $_POST['adminEmail'], $_POST['adminPassword'], $_POST['adminPseudo'], $_POST['adminPermission']);
-                                $message = "<p class='text-success'>Le rôle a bien été modifié.</p>";
-                            }
-                            echo $message;
-                        }
-                        ?>
+                        if(isset($message))
+                            echo $message;  ?>
 
                     </div>
                 </div>

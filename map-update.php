@@ -85,14 +85,39 @@ $mapLatitude = $_GET['latitude'];
                 <!-- DataTales Example -->
                 <div class="card shadow mb-4">
                     <div class="card-body">
+
+                        <?php
+                        function updateMap($mapID, $mapNom, $mapFiltre, $mapLongitude, $mapLatitude){
+                            require("connection.php");
+                            $requete = "UPDATE info_map SET map_nomlieu= :newNom, map_filtre= :newFiltre, map_longitude= :newLongitude, map_latitude= :newLatitude WHERE map_ID= :newID ";
+                            $sth = $bdd->prepare($requete);
+                            $sth->execute(array(
+                                'newID' => $mapID,
+                                'newNom' => $mapNom,
+                                'newFiltre' => $mapFiltre,
+                                'newLongitude' => $mapLongitude,
+                                'newLatitude' => $mapLatitude,
+                            ));
+                            $bdd = null;
+                        }
+                        // Lorsque l'utilisateur clique sur le bouton submit et si les champs ne sont pas vides
+                        if (isset($_POST['submit'])) {
+                            if (empty($_POST['mapNom']) || empty($_POST['mapFiltre']) || empty($_POST['mapLongitude']) || empty($_POST['mapLatitude'])) {
+                                $message = "<p class='text-danger'>Veuillez remplir tous les champs du formulaire.</p>";
+                            } else {
+                                updateMap($mapID, $_POST['mapNom'], $_POST['mapFiltre'], $_POST['mapLongitude'], $_POST['mapLatitude']);
+                                $message = "<p class='text-success'>Le point d'intérêt a bien été modifié.</p>";
+                                $mapNom = $_POST['mapNom'];
+                                $mapFiltre = $_POST['mapFiltre'];
+                                $mapLongitude = $_POST['mapLongitude'];
+                                $mapLatitude = $_POST['mapLatitude'];
+                            }
+                        }
+                        ?>
+
                         <form action="" method="POST">
 
                             <!-- Text input -->
-                            <div class="form-outline mb-4">
-                                <label class="form-label" for="form6Example3">ID</label>
-                                <input type="text" name="mapID" value="<?php echo $mapID; ?>" id="form6Example3" class="form-control" />
-                            </div>
-
                             <div class="form-outline mb-4">
                                 <label class="form-label" for="form6Example3">Nom du point d'intérêt</label>
                                 <input type="text" name="mapNom" value="<?php echo $mapNom; ?>" id="form6Example3" class="form-control" />
@@ -119,32 +144,9 @@ $mapLatitude = $_GET['latitude'];
                             <input type="submit" name="submit" class="col-lg-3 btn btn-primary btn-block mb-4 float-right" value="Enregistrer" />
                         </form>
 
-
                         <?php
-                        function updateMap($mapID, $mapNom, $mapFiltre, $mapLongitude, $mapLatitude){
-                            require("connection.php");
-                            $requete = "UPDATE info_map SET map_nomlieu= :newNom, map_filtre= :newFiltre, map_longitude= :newLongitude, map_latitude= :newLatitude WHERE map_ID= :newID ";
-                            $sth = $bdd->prepare($requete);
-                            $sth->execute(array(
-                                'newID' => $mapID,
-                                'newNom' => $mapNom,
-                                'newFiltre' => $mapFiltre,
-                                'newLongitude' => $mapLongitude,
-                                'newLatitude' => $mapLatitude,
-                            ));
-                            $bdd = null;
-                        }
-                        // Lorsque l'utilisateur clique sur le bouton submit et si les champs ne sont pas vides
-                        if (isset($_POST['submit'])) {
-                            if (empty($_POST['mapID']) || empty($_POST['mapNom']) || empty($_POST['mapFiltre']) || empty($_POST['mapLongitude']) || empty($_POST['mapLatitude'])) {
-                                $message = "<p class='text-danger'>Veuillez remplir tous les champs du formulaire.</p>";
-                            } else {
-                                updateMap($mapID, $_POST['mapNom'], $_POST['mapFiltre'], $_POST['mapLongitude'], $_POST['mapLatitude']);
-                                $message = "<p class='text-success'>Le point d'intérêt a bien été modifié.</p>";
-                            }
-                            echo $message;
-                        }
-                        ?>
+                        if(isset($message))
+                            echo $message;  ?>
 
                     </div>
                 </div>

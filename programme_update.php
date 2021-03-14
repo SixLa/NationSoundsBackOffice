@@ -125,7 +125,7 @@
                             if(empty($_POST['time']) || empty($_POST['desc']) || empty($_POST['scene'])){
                                 $message = "<p class='text-danger'>Veuillez remplir tous les champs du formulaire.</p>";;
                             }else{
-                                createEvent($_POST['time'], $_POST['scene'], $_POST['desc']);
+                                updateEvent($id,$_POST['time'], $_POST['scene'], $_POST['desc']);
                              $message ="<p class='text-success'>Le nouvel evenement a bien été créé.</p>";;
                             }
                             echo $message;

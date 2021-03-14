@@ -1,6 +1,17 @@
 <?php 
 
 
+function updateEvent($id,$date, $ID, $type){
+	require("connection.php");
+	$requestEnvoi = $bdd->prepare('UPDATE event SET event_date = :array_date, fk_scenes_ID = :array_ID,   = :array_type WHERE event_ID = :array_id_event');
+	$requestEnvoi->execute(array('array_date' => $date, 'array_id_event' => $id, ':array_type' => $type, ':array_ID' => $ID));
+
+
+	$bdd = NULL;
+
+}
+
+
 Function getEvent($id){
     require("connection.php");
     $request = $bdd->prepare('SELECT * FROM event WHERE event_ID = :array_id');
@@ -68,10 +79,11 @@ function showEvent(){
 	return $resultat;
 }
 
-
-
 function deleteEvent($id){
     require("connection.php");
+
+    deleteParticipeFromEvent($id);
+
 	$request = $bdd->prepare('DELETE FROM event WHERE event_ID = :array_id');
 	$request->execute(array(':array_id' => $id));
 
@@ -79,9 +91,17 @@ function deleteEvent($id){
 
 }
 
+function deleteParticipeFromEvent($id){
+    require("connection.php");
+	$request = $bdd->prepare('DELETE FROM participe WHERE fk_event_ID = :array_id');
+	$request->execute(array(':array_id' => $id));
+
+    $bdd = NULL;
+}
+
 function deleteParticipe($id){
     require("connection.php");
-	$request = $bdd->prepare('DELETE FROM participe WHERE participe = :array_id');
+	$request = $bdd->prepare('DELETE FROM participe WHERE participe_ID = :array_id');
 	$request->execute(array(':array_id' => $id));
 
 	$bdd = NULL;

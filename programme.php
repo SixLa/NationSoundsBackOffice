@@ -90,7 +90,7 @@
 
                                             <td class="d-flex justify-content-around">
                                                 <a href="artistes_update.php?id=<?php echo $artiste[0]; ?>"><i class="fas fa-pencil-alt btn-primary btn.circle btn-sm" title="Modifier"></i></a>
-                                                <a href="delete_artiste.php?id=<?php echo $artiste[0] ; ?>"onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet artiste ?');"><i class="fas fa-trash btn-danger btn.circle btn-sm" name ="delete" title="Supprimer"></i></a>
+                                                <a href="programme_delete.php?id=<?php echo $event[0] ; ?>"onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet artiste ?');"><i class="fas fa-trash btn-danger btn.circle btn-sm" name ="delete" title="Supprimer"></i></a>
                                             </td>
                                         </tr>
                                         <?php 

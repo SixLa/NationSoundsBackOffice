@@ -64,6 +64,35 @@ $actusContenu = $_GET['contenu'];
                 <!-- DataTales Example -->
                 <div class="card shadow mb-4">
                     <div class="card-body">
+
+                        <?php
+                        // Fonction update des actualités
+                        function updateActus($actusID, $actusDate, $actusNom, $actusContenu){
+                            require("connection.php");
+                            $requete = "UPDATE news SET news_date= :newDate, news_nom= :newNom, news_contenu= :newContenu WHERE news_ID= :newID ";
+                            $sth = $bdd->prepare($requete);
+                            $sth->execute(array(
+                                'newID' => $actusID,
+                                'newDate' => $actusDate,
+                                'newNom' => $actusNom,
+                                'newContenu' => $actusContenu
+                            ));
+                            $bdd = null;
+                        }
+                        // Lorsque l'utilisateur clique sur le bouton submit et si les champs ne sont pas vides
+                        if (isset($_POST['submit'])) {
+                            if (empty($_POST['actusNom']) || empty($_POST['actusDate']) || empty($_POST['actusContenu'])) {
+                                $message = "<p class='text-danger'>Veuillez remplir tous les champs du formulaire.</p>";
+                            } else {
+                                updateActus($actusID, $_POST['actusDate'], $_POST['actusNom'], $_POST['actusContenu']);
+                                $message = "<p class='text-success'>L'actualité a bien été modifiée.</p>";
+                                $actusDate = $_POST['actusDate'];
+                                $actusNom = $_POST['actusNom'];
+                                $actusContenu = $_POST['actusContenu'];
+                            }
+                        }
+                        ?>
+
                         <form action="" method="POST">
 
                             <!-- Text input -->
@@ -88,30 +117,8 @@ $actusContenu = $_GET['contenu'];
                         </form>
 
                         <?php
-                        // Fonction update des actualités
-                        function updateActus($actusID, $actusDate,  $actusNom, $actusContenu){
-                            require("connection.php");
-                            $requete = "UPDATE news SET news_date= :newDate, news_nom= :newNom, news_contenu= :newContenu WHERE news_ID= :newID ";
-                            $sth = $bdd->prepare($requete);
-                            $sth->execute(array(
-                                'newID' => $actusID,
-                                'newDate' => $actusDate,
-                                'newNom' => $actusNom,
-                                'newContenu' => $actusContenu
-                            ));
-                            $bdd = null;
-                        }
-                        // Lorsque l'utilisateur clique sur le bouton submit et si les champs ne sont pas vides
-                        if (isset($_POST['submit'])) {
-                            if (empty($_POST['actusNom']) || empty($_POST['actusDate']) || empty($_POST['actusContenu'])) {
-                                $message = "<p class='text-danger'>Veuillez remplir tous les champs du formulaire.</p>";
-                            } else {
-                                updateActus($actusID, $_POST['actusDate'], $_POST['actusNom'], $_POST['actusContenu']);
-                                $message = "<p class='text-success'>L'artiste a bien été modifié.</p>";
-                            }
-                            echo $message;
-                        }
-                        ?>
+                        if(isset($message))
+                            echo $message;  ?>
 
                     </div>
                 </div>

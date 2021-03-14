@@ -1,4 +1,7 @@
 <!-- Sidebar -->
+<?php
+session_start();
+?>
         <ul class="navbar-nav bg-dark-blue sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->

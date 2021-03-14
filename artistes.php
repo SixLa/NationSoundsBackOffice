@@ -69,7 +69,6 @@
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <thead>
                                         <tr>
-                                            <th>artiste ID</th>
                                             <th>Nom</th>
                                             <th>Description</th>
                                             <th>Actions</th>
@@ -77,7 +76,6 @@
                                     </thead>
                                     <tfoot>
                                         <tr>
-                                            <th>artiste ID</th>
                                             <th>Nom</th>
                                             <th>Description</th>
                                             <th>Actions</th>
@@ -88,7 +86,6 @@
                                         $artistes = showArtistes();
                                         foreach($artistes as $artiste): ?>
                                         <tr>
-                                            <td><?php echo $artiste[0] ?></td>
                                             <td><?php echo $artiste[1] ?></td>
                                             <td><?php echo $artiste[2] ?></td>
 

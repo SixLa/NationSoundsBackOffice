@@ -23,6 +23,9 @@
     <!-- Custom styles for this page -->
     <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 
+    <?php
+    include ("register-fonction.php");
+    ?>
 </head>
 
 <body id="page-top">
@@ -113,25 +116,17 @@
 
                             // si erreur form reste à faux = pas d'erreur au niveau du formulaire
                             if ( $erreurform == false && $erreurPass == false) {
+                                $result = inscription($_POST['adminEmail'], $_POST['adminPassword'], $_POST['adminPseudo'],$_POST['adminPermission']);
 
-                                $requete_insertion = "INSERT INTO utilisateurs VALUES (null,:admin_email,:admin_password,:admin_pseudo,:admin_permission)";
-                                require("connection.php");
                                 // Exécuter la requête
-                                $sth = $bdd->prepare($requete_insertion);
-                                $sth->bindValue(":admin_email",$_POST['adminEmail'],PDO::PARAM_STR);
-                                $sth->bindValue(":admin_password",$_POST['adminPassword'],PDO::PARAM_STR);
-                                $sth->bindValue(":admin_pseudo",$_POST['adminPseudo'],PDO::PARAM_STR);
-                                $sth->bindValue(":admin_permission",$_POST['adminPermission'],PDO::PARAM_STR);
-                                if ($sth->execute()) {
-                                    echo "Le nouveau rôle a bien été enregistré.";
+                                if ($result) {
+                                    echo "<p class='text-success'>Le nouvel utilisateur a bien été créé.</p>";
                                 }
                                 $bdd = null;
                             }
                             if ($erreurform == true)
-                                echo "Veuillez remplir tous les champs du formulaire.";
+                                echo "<p class='text-danger'>Veuillez remplir tous les champs du formulaire.</p>";
                         }
-
-                        
                         ?>
 
                     </div>

@@ -1,4 +1,44 @@
-<?php 
+<?php
+
+function ajoutParticipant($id_a, $id_e){
+
+
+    require("connection.php");
+	$requestEnvoi = $bdd->prepare('INSERT INTO `participe` (`fk_artistes_ID`, `fk_event_ID`) VALUES (:array_A_ID, :array_E_ID)');
+	$requestEnvoi->execute(array(':array_A_ID' => $id_a, ':array_E_ID' => $id_e,));
+}
+
+
+
+
+function showParticipantsNotIncluded(){
+
+    require("connection.php");
+    $request = $bdd->prepare(
+        'SELECT artistes_ID, artistes_nom
+        FROM artistes');
+	$request->execute();
+    $resultat = $request;
+
+	$bdd = NULL;
+	return $resultat;
+}
+
+
+function showParticipants($id){
+
+    require("connection.php");
+    $request = $bdd->prepare(
+        'SELECT artistes_ID, artistes_nom
+        FROM artistes
+        INNER JOIN participe ON artistes.artistes_ID = participe.fk_artistes_ID
+        WHERE participe.fk_event_ID = :array_ID');
+	$request->execute(array(':array_ID' => $id));
+    $resultat = $request;
+
+	$bdd = NULL;
+	return $resultat;
+}
 
 
 Function getEvent($id){
@@ -89,7 +129,7 @@ function deleteParticipeFromEvent($id){
 
 function deleteParticipe($id){
     require("connection.php");
-	$request = $bdd->prepare('DELETE FROM participe WHERE participe = :array_id');
+	$request = $bdd->prepare('DELETE FROM participe WHERE fk_artistes_ID = :array_id');
 	$request->execute(array(':array_id' => $id));
 
 	$bdd = NULL;

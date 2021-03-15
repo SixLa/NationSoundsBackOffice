@@ -25,19 +25,6 @@
 
     <?php include ('programme-fonction.php');
      $id = $_GET['id'];
-     $date = "";
-     $desc = "";
-     $lieu = "";
-     $event = getEvent($id);
-     foreach($event as $a){
-         $date = $a[1];
-         $lieu = $a[2];
-         $desc = $a[3];
-     }
-
-    $date = strtotime($date);
-    $newDate = date('Y-m-d\TH:i', $date);
-    
     ?>
 
 </head>
@@ -73,6 +60,19 @@
                     <p class="mb-4 text-white">Entrez ici les informations liées a l'evenement que vous voulez éditer.</p>
 
                     <!-- DataTales Example -->
+
+                    <?php
+                    if(isset($_POST['ajout_participant'])){
+                        ajoutParticipant($_POST['participant2'],$id);
+                        $message ="<p class='text-success'>Le participant a bien été ajouté.</p>"; 
+                        }   
+
+                    if(isset($_POST['delete_participant'])){
+                        deleteParticipe($_POST['participant']);
+                        $message ="<p class='text-success'>Le participant a bien été supprimé.</p>";
+                    }   
+    ?>
+
                     <div class="card shadow mb-4">
                         <div class="card-body">
                             <form action="" method="post">
@@ -80,14 +80,13 @@
                                 <div class="row mb-4">
                                     <div class="col">
                                     <div class="form-outline">
-                                        <label class="form-label" for="form6Example1">Lieu</label>
+                                        <label class="form-label" for="form6Example1">Participant(s)</label>
                                         <br>
-                                        <select name="scene" id="scene">
-                                        <option value="<?php echo $id ?>"> <?php echo $lieu ;?> </option>
+                                        <select name="participant" id="participant">
                                         <?php
                                         
-                                        $scenes = getScene();
-                                        foreach($scenes as $s): ?>
+                                        $participants = showParticipants($id);
+                                        foreach($participants as $s): ?>
                                         <option value="<?php echo $s[0] ?>"> <?php echo $s[1] ;?> </option>
                                         <?php endforeach; ?>
                                     </select>
@@ -95,51 +94,42 @@
                                     </div>
                                     
                                 </div>
+ 
+                                <!-- Submit button -->
+                                <button type="submit" name="delete_participant" class="col-lg-3 btn btn-primary btn-block mb-4 float-right">supprimer participant</button>
+                            </form>
 
+                            <br> <br> <br>
+
+                            <form action="" method="post">
+                                <!-- 2 column grid layout with text inputs for the first and last names -->
                                 <div class="row mb-4">
                                     <div class="col">
                                     <div class="form-outline">
-                                        <label class="form-label" for="form6Example1">Description evenement</label>
-                                        <input type="text" id="desc" name="desc" value ="<?php echo $desc ?>" class="form-control" />
+                                        <label class="form-label" for="form6Example1">Participant(s)</label>
+                                        <br>
+                                        <select name="participant2" id="participant2">
+                                        <?php
+                                        
+                                        $participants2 = showParticipantsNotIncluded($id);
+                                        foreach($participants2 as $s): ?>
+                                        <option value="<?php echo $s[0] ?>"> <?php echo $s[1] ;?> </option>
+                                        <?php endforeach; ?>
+                                    </select>
                                     </div>
                                     </div>
                                     
-                                </div>
-
-                                <div class="row mb-4">
-                                    <div class="col">
-                                    <div class="form-outline">
-                                        <label class="form-label" for="form6Example1">horaire</label>
-                                        <input type="datetime-local" id="time" name="time" value ="<?php echo $newDate ?>" class="form-control" />
-                                    </div>
-                                    </div>
-                                    
-                                </div>
-
-                                <div class="d-flex justify-content-between">
-                                    <h1 class="h3 mb-2 text-white">Evénements</h1>
-                                    <p class="text-right"><a href="gestion_participant.php?id=<?php echo $id; ?> class="btn btn-primary btn-lg mb-3" role="button" aria-pressed="true">gérer participants</a></p>
                                 </div>
  
-
-
                                 <!-- Submit button -->
-                                <button type="submit" name="create" class="col-lg-3 btn btn-primary btn-block mb-4 float-right">Enregistrer</button>
+                                <button type="submit" name="ajout_participant" class="col-lg-3 btn btn-primary btn-block mb-4 float-right">Ajouter participant</button>
                             </form>
-                        <?php
-                        
-                        if(isset($_POST['create'])){
-                            if(empty($_POST['time']) || empty($_POST['desc']) || empty($_POST['scene'])){
-                                $message = "<p class='text-danger'>Veuillez remplir tous les champs du formulaire.</p>";;
-                            }else{
-                                createEvent($_POST['time'], $_POST['scene'], $_POST['desc']);
-                             $message ="<p class='text-success'>Le nouvel evenement a bien été créé.</p>";;
-                            }
-                            echo $message;
-                         }       
-                            ?>
+
 
                         </div>
+                        <?php
+                            if(isset($message))
+                                echo $message;  ?>
                     </div>
 
                 </div>

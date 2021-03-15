@@ -118,7 +118,7 @@
 
                                 <div class="d-flex justify-content-between">
                                     <h1 class="h3 mb-2 text-white">Evénements</h1>
-                                    <p class="text-right"><a href="gestion_participant.php?id=<?php echo $id; ?> class="btn btn-primary btn-lg mb-3" role="button" aria-pressed="true">gérer participants</a></p>
+                                    <p class="text-right"><a href="gestion_participant.php?id=<?php echo $id; ?>" class="btn btn-primary btn-lg mb-3" role="button" aria-pressed="true">gérer participants</a></p>
                                 </div>
  
 

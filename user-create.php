@@ -23,6 +23,9 @@
     <!-- Custom styles for this page -->
     <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 
+    <?php
+    include ("register-fonction.php");
+    ?>
 </head>
 
 <body id="page-top">
@@ -52,7 +55,7 @@
             <div class="container-fluid">
 
                 <!-- Page Heading -->
-                <h1 class="h3 mb-2 text-white">Créer une nouvelle actualité</h1>
+                <h1 class="h3 mb-2 text-white">Créer un nouvel utilisateur</h1>
 
                 <!-- DataTales Example -->
                 <div class="card shadow mb-4">
@@ -60,19 +63,31 @@
                         <form action="" method="post" id="actuCreate">
                             <!-- Text input -->
                             <div class="form-outline mb-4">
-                                <label class="form-label" for="form6Example3">Titre de l'actualité</label>
-                                <input type="text" name="actuNom" value="" id="form6Example3" class="form-control" />
+                                <label class="form-label" for="form6Example3">Email</label>
+                                <input type="email" name="adminEmail" value="" id="form6Example3" class="form-control" />
                             </div>
                             <!-- Text input -->
                             <div class="form-outline mb-4">
-                                <label class="form-label" for="form6Example3">Date de l'actualité</label>
-                                <input type="date" name="actuDate" value="" id="form6Example3" class="form-control" />
+                                <label class="form-label" for="form6Example3">Mot de passe (doit comporter au munimum : 8 caractères, 1 majuscule, 1 minuscule, 1 chiffre) </label>
+                                <input type="password" name="adminPassword" value="" id="form6Example3" class="form-control" />
                             </div>
 
-                            <!-- Message input -->
+                            <!-- Text input -->
                             <div class="form-outline mb-4">
-                                <label class="form-label" for="form6Example7">Description de l'actualité</label>
-                                <textarea class="form-control" name="actuContenu" value="" id="form6Example7" rows="4"></textarea>
+                                <label class="form-label" for="form6Example3">Pseudo</label>
+                                <input type="text" name="adminPseudo" value="" id="form6Example3" class="form-control" />
+                            </div>
+
+                            <!-- Text input -->
+                            <div class="form-outline mb-4">
+                                <label class="form-label" for="form6Example3">Permission</label>
+                                <SELECT id="form6Example3" class="form-control" name="adminPermission" size="1" value="">
+                                    <OPTION value="">--sélectionnez un rôle--
+                                    <OPTION value="Administrateur">Administrateur
+                                    <OPTION value="Éditeur">Éditeur
+                                    <OPTION value="Auteur">Auteur
+                                    <OPTION value="Abonné">Abonné
+                                    </SELECT>   
                             </div>
 
                             <!-- Submit button -->
@@ -84,6 +99,7 @@
                         if (isset($_POST['save'])) {
 
                             $erreurform = false;
+                            $erreurPass = false;
 
                             foreach ($_POST as $value) {
                                 // Trim = supprimer espaces avant et après dans le form
@@ -91,23 +107,25 @@
                                 }
                                 else $erreurform = true;
                             }
+                            // Validation du mot de passe
+                            $secuPassword = $_POST['adminPassword'];
+                            if (!preg_match("#.*^(?=.{8,20})(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).*$#", $secuPassword )){
+                                $erreurPass = true;
+                                echo "Votre mot depasse est trop faible !";
+                            }
 
                             // si erreur form reste à faux = pas d'erreur au niveau du formulaire
-                            if ( $erreurform == false) {
+                            if ( $erreurform == false && $erreurPass == false) {
+                                $result = inscription($_POST['adminEmail'], $_POST['adminPassword'], $_POST['adminPseudo'],$_POST['adminPermission']);
 
-                                $requete_insertion = "INSERT INTO news VALUES (null,:news_date,:news_nom,:news_contenu)";
-                                require("connection.php");
                                 // Exécuter la requête
-                                $sth = $bdd->prepare($requete_insertion);
-                                $sth->bindValue(":news_date",$_POST['actuDate'],PDO::PARAM_STR);
-                                $sth->bindValue(":news_nom",$_POST['actuNom'],PDO::PARAM_STR);
-                                $sth->bindValue(":news_contenu",$_POST['actuContenu'],PDO::PARAM_STR);
-                                if ($sth->execute()) {
-                                    echo "<p class='text-success'>La nouvelle actualité a bien été enregistrée.</p>";
+                                if ($result) {
+                                    echo "<p class='text-success'>Le nouvel utilisateur a bien été créé.</p>";
                                 }
                                 $bdd = null;
                             }
-                            else echo "<p class='text-danger'>Veuillez remplir tous les champs du formulaire.</p>";
+                            if ($erreurform == true)
+                                echo "<p class='text-danger'>Veuillez remplir tous les champs du formulaire.</p>";
                         }
                         ?>
 

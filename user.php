@@ -52,11 +52,8 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <div class="d-flex justify-content-between">
-                        <h1 class="h3 mb-2 text-white">Actualités</h1>
-                        <p class="text-right"><a href="actus-create.php" class="btn btn-primary btn-lg mb-3" role="button" aria-pressed="true">Ajouter une actualité</a></p>
-                    </div>
-                    <p class="mb-4 text-white">Retrouvez et gérez toutes les actualités publiées sur l'application du festival.</p>
+                    <h1 class="h3 mb-2 text-white">Utilisateurs</h1>
+                    <p class="text-right"><a href="user-create.php" class="btn btn-primary btn-lg mb-3" role="button" aria-pressed="true">Ajouter un utilisateur</a></p>
 
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
@@ -65,35 +62,38 @@
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <thead>
                                         <tr>
-                                            <th>Titre</th>
-                                            <th>Date</th>
-                                            <th>Contenu</th>
+                                            <th>Email</th>
+                                            <th>Mot de passe</th>
+                                            <th>Pseudo</th>
+                                            <th>Permission</th>
                                             <th>Actions</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
                                     <tr>
-                                            <th>Titre</th>
-                                            <th>Date</th>
-                                            <th>Contenu</th>
+                                            <th>Email</th>
+                                            <th>Mot de passe</th>
+                                            <th>Pseudo</th>
+                                            <th>Permission</th>
                                             <th>Actions</th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
                                         <?php
-                                            $requete = "SELECT news_ID, news_nom, news_date, news_contenu FROM news";
+                                            $requete = "SELECT admin_ID, admin_email, admin_password, admin_pseudo, admin_permission FROM utilisateurs";
                                             require("connection.php");
                                             $stmt = $bdd->query($requete);
                                             while($row = $stmt->fetch(PDO::FETCH_ASSOC)) :
                                         ?>
 
                                         <tr>
-                                            <td><?php echo ($row[news_nom]) ?></td>
-                                            <td><?php echo ($row[news_date]) ?></td>
-                                            <td><?php echo ($row[news_contenu]) ?></td>
+                                            <td><?php echo ($row[admin_email]) ?></td>
+                                            <td><?php echo ($row[admin_password]) ?></td>
+                                            <td><?php echo ($row[admin_pseudo]) ?></td>
+                                            <td><?php echo ($row[admin_permission]) ?></td>
                                             <td class="d-flex justify-content-around">
-                                                <?php echo "<a href=\"actus-update.php?ID={$row[news_ID]}&date={$row[news_date]}&nom={$row[news_nom]}&contenu={$row[news_contenu]}\">" ?> <i class="fas fa-pencil-alt btn-primary btn.circle btn-sm" title="Modifier"></i></a>
-                                                <a href="actus-delete.php?id=<?php echo $row[news_ID]; ?>" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette actualité ?')"><i class="fas fa-trash btn-danger btn.circle btn-sm" name ="delete" title="Supprimer"></i></a>
+                                                <?php echo "<a href=\"user-update.php?ID={$row[admin_ID]}&email={$row[admin_email]}&password={$row[admin_password]}&pseudo={$row[admin_pseudo]}&permission={$row[admin_permission]}\">" ?> <i class="fas fa-pencil-alt btn-primary btn.circle btn-sm" title="Modifier"></i></a>
+                                                <a href="user-delete.php?id=<?php echo $row[admin_ID]; ?>"><i class="fas fa-trash btn-danger btn.circle btn-sm" name ="delete" title="Supprimer" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet utilisateur ?')"></i></a>
                                             </td>
                                         </tr>
                                         <?php endwhile; ?>

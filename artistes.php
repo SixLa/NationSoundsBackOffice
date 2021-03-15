@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Nation Sounds - Actualités</title>
+    <title>Nation Sounds</title>
 
     <!-- Custom fonts for this template -->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -23,10 +23,14 @@
     <!-- Custom styles for this page -->
     <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 
+<?php
+    include ('artistes_function.php');
+?>
+
+
 </head>
 
 <body id="page-top">
-
     <!-- Page Wrapper -->
     <div id="wrapper">
 
@@ -53,10 +57,10 @@
 
                     <!-- Page Heading -->
                     <div class="d-flex justify-content-between">
-                        <h1 class="h3 mb-2 text-white">Actualités</h1>
-                        <p class="text-right"><a href="actus-create.php" class="btn btn-primary btn-lg mb-3" role="button" aria-pressed="true">Ajouter une actualité</a></p>
+                        <h1 class="h3 mb-2 text-white">Artistes</h1>
+                        <p class="text-right"><a href="artistes_create.php" class="btn btn-primary btn-lg mb-3" role="button" aria-pressed="true">Ajouter un artiste</a></p>
                     </div>
-                    <p class="mb-4 text-white">Retrouvez et gérez toutes les actualités publiées sur l'application du festival.</p>
+                    <p class="mb-4 text-white">Retrouvez et gérez tous les artistes présents lors du festival.</p>
 
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
@@ -65,43 +69,44 @@
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <thead>
                                         <tr>
-                                            <th>Titre</th>
-                                            <th>Date</th>
-                                            <th>Contenu</th>
+                                            <th>Nom</th>
+                                            <th>Description</th>
                                             <th>Actions</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
-                                    <tr>
-                                            <th>Titre</th>
-                                            <th>Date</th>
-                                            <th>Contenu</th>
+                                        <tr>
+                                            <th>Nom</th>
+                                            <th>Description</th>
                                             <th>Actions</th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
                                         <?php
-                                            $requete = "SELECT news_ID, news_nom, news_date, news_contenu FROM news";
-                                            require("connection.php");
-                                            $stmt = $bdd->query($requete);
-                                            while($row = $stmt->fetch(PDO::FETCH_ASSOC)) :
-                                        ?>
-
+                                        $artistes = showArtistes();
+                                        foreach($artistes as $artiste): ?>
                                         <tr>
-                                            <td><?php echo ($row[news_nom]) ?></td>
-                                            <td><?php echo ($row[news_date]) ?></td>
-                                            <td><?php echo ($row[news_contenu]) ?></td>
+                                            <td><?php echo $artiste[1] ?></td>
+                                            <td><?php echo $artiste[2] ?></td>
+
                                             <td class="d-flex justify-content-around">
-                                                <?php echo "<a href=\"actus-update.php?ID={$row[news_ID]}&date={$row[news_date]}&nom={$row[news_nom]}&contenu={$row[news_contenu]}\">" ?> <i class="fas fa-pencil-alt btn-primary btn.circle btn-sm" title="Modifier"></i></a>
-                                                <a href="actus-delete.php?id=<?php echo $row[news_ID]; ?>" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette actualité ?')"><i class="fas fa-trash btn-danger btn.circle btn-sm" name ="delete" title="Supprimer"></i></a>
+                                                <a href="artistes_update.php?id=<?php echo $artiste[0]; ?>"><i class="fas fa-pencil-alt btn-primary btn.circle btn-sm" title="Modifier"></i></a>
+                                                <a href="delete_artiste.php?id=<?php echo $artiste[0] ; ?>"onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet artiste ?');"><i class="fas fa-trash btn-danger btn.circle btn-sm" name ="delete" title="Supprimer"></i></a>
                                             </td>
                                         </tr>
-                                        <?php endwhile; ?>
+                                        <?php 
+                                        
+                                        if(isset($_POST["Supprimer"])){
+                                            deleteArtiste($artiste[0]);
+                                        }
+                                        ?>
+                                        <?php endforeach; ?>
                                     </tbody>
                                 </table>
                             </div>
                         </div>
                     </div>
+
                 </div>
                 <!-- /.container-fluid -->
 

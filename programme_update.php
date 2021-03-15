@@ -23,6 +23,23 @@
     <!-- Custom styles for this page -->
     <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 
+    <?php include ('programme-fonction.php');
+     $id = $_GET['id'];
+     $date = "";
+     $desc = "";
+     $lieu = "";
+     $event = getEvent($id);
+     foreach($event as $a){
+         $date = $a[1];
+         $lieu = $a[2];
+         $desc = $a[3];
+     }
+
+    $date = strtotime($date);
+    $newDate = date('Y-m-d\TH:i', $date);
+    
+    ?>
+
 </head>
 
 <body id="page-top">
@@ -52,56 +69,76 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-white">Formulaire</h1>
-                    <p class="mb-4 text-white">Texte à ajouter ou à supprimer si vous ne mettez pas de texte.</p>
+                    <h1 class="h3 mb-2 text-white">Edition de l'événement</h1>
+                    <p class="mb-4 text-white">Entrez ici les informations liées à l'événement que vous voulez éditer.</p>
 
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-body">
-                            <form>
+                            <form action="" method="post">
                                 <!-- 2 column grid layout with text inputs for the first and last names -->
                                 <div class="row mb-4">
                                     <div class="col">
                                     <div class="form-outline">
-                                        <label class="form-label" for="form6Example1">Texte 1 sur 2 colonnes</label>
-                                        <input type="text" id="form6Example1" class="form-control" />
+                                        <label class="form-label" for="form6Example1">Lieu</label>
+                                        <br>
+                                        <select name="scene" id="scene">
+                                        <option value="<?php echo $id ?>"> <?php echo $lieu ;?> </option>
+                                        <?php
+                                        
+                                        $scenes = getScene();
+                                        foreach($scenes as $s): ?>
+                                        <option value="<?php echo $s[0] ?>"> <?php echo $s[1] ;?> </option>
+                                        <?php endforeach; ?>
+                                    </select>
                                     </div>
                                     </div>
+                                    
+                                </div>
+
+                                <div class="row mb-4">
                                     <div class="col">
                                     <div class="form-outline">
-                                        <label class="form-label" for="form6Example2">Texte 2 sur 2 colonnes</label>
-                                        <input type="text" id="form6Example2" class="form-control" />
+                                        <label class="form-label" for="form6Example1">Type d'événement</label>
+                                        <input type="text" id="desc" name="desc" value ="<?php echo $desc ?>" class="form-control" />
                                     </div>
                                     </div>
+                                    
                                 </div>
 
-                                <!-- Text input -->
-                                <div class="form-outline mb-4">
-                                    <label class="form-label" for="form6Example3">Texte sur 1 colonne</label>
-                                    <input type="text" id="form6Example3" class="form-control" />
+                                <div class="row mb-4">
+                                    <div class="col">
+                                    <div class="form-outline">
+                                        <label class="form-label" for="form6Example1">Horaires</label>
+                                        <input type="datetime-local" id="time" name="time" value ="<?php echo $newDate ?>" class="form-control" />
+                                    </div>
+                                    </div>
+                                    
                                 </div>
 
-                                <!-- Email input -->
-                                <div class="form-outline mb-4">
-                                    <label class="form-label" for="form6Example5">Type Email</label>
-                                    <input type="email" id="form6Example5" class="form-control" />
+                                <div class="d-flex justify-content-between">
+                                    <h1 class="h3 mb-2 text-white">Evénements</h1>
+                                    <p class="text-right"><a href="gestion_participant.php?id=<?php echo $id; ?>" class="btn btn-primary btn-lg mb-3" role="button" aria-pressed="true">Gérer les artistes</a></p>
                                 </div>
+ 
 
-                                <!-- Number input -->
-                                <div class="form-outline mb-4">
-                                    <label class="form-label" for="form6Example6">Numéro à choisir</label>
-                                    <input type="number" id="form6Example6" class="form-control" />
-                                </div>
-
-                                <!-- Message input -->
-                                <div class="form-outline mb-4">
-                                    <label class="form-label" for="form6Example7">Text area</label>
-                                    <textarea class="form-control" id="form6Example7" rows="4"></textarea>
-                                </div>
 
                                 <!-- Submit button -->
-                                <button type="submit" class="col-lg-3 btn btn-primary btn-block mb-4 float-right">Enregistrer</button>
+                                <button type="submit" name="create" class="col-lg-3 btn btn-primary btn-block mb-4 float-right">Enregistrer</button>
                             </form>
+                        <?php
+                        
+                        if(isset($_POST['create'])){
+                            if(empty($_POST['time']) || empty($_POST['desc']) || empty($_POST['scene'])){
+                                $message = "<p class='text-danger'>Veuillez remplir tous les champs du formulaire.</p>";;
+                            }else{
+                                createEvent($_POST['time'], $_POST['scene'], $_POST['desc']);
+                             $message ="<p class='text-success'>Le nouvel événement a bien été créé.</p>";;
+                            }
+                            echo $message;
+                         }       
+                            ?>
+
                         </div>
                     </div>
 

@@ -1,15 +1,8 @@
 <?php
-// Connexion à la base de données
-include('connection.php');
 $actusID = $_GET['ID'];
 $actusNom = $_GET['nom'];
 $actusDate = $_GET['date'];
 $actusContenu = $_GET['contenu'];
-
-$postedID = $_POST['actusID'];
-$postedNom = addslashes($_POST['actusNom']);
-$postedDate = $_POST['actusDate'];
-$postedContenu = addslashes($_POST['actusContenu']);
 ?>
 
 <!DOCTYPE html>
@@ -71,14 +64,38 @@ $postedContenu = addslashes($_POST['actusContenu']);
                 <!-- DataTales Example -->
                 <div class="card shadow mb-4">
                     <div class="card-body">
+
+                        <?php
+                        // Fonction update des actualités
+                        function updateActus($actusID, $actusDate, $actusNom, $actusContenu){
+                            require("connection.php");
+                            $requete = "UPDATE news SET news_date= :newDate, news_nom= :newNom, news_contenu= :newContenu WHERE news_ID= :newID ";
+                            $sth = $bdd->prepare($requete);
+                            $sth->execute(array(
+                                'newID' => $actusID,
+                                'newDate' => $actusDate,
+                                'newNom' => $actusNom,
+                                'newContenu' => $actusContenu
+                            ));
+                            $bdd = null;
+                        }
+                        // Lorsque l'utilisateur clique sur le bouton submit et si les champs ne sont pas vides
+                        if (isset($_POST['submit'])) {
+                            if (empty($_POST['actusNom']) || empty($_POST['actusDate']) || empty($_POST['actusContenu'])) {
+                                $message = "<p class='text-danger'>Veuillez remplir tous les champs du formulaire.</p>";
+                            } else {
+                                updateActus($actusID, $_POST['actusDate'], $_POST['actusNom'], $_POST['actusContenu']);
+                                $message = "<p class='text-success'>L'actualité a bien été modifiée.</p>";
+                                $actusDate = $_POST['actusDate'];
+                                $actusNom = $_POST['actusNom'];
+                                $actusContenu = $_POST['actusContenu'];
+                            }
+                        }
+                        ?>
+
                         <form action="" method="POST">
 
                             <!-- Text input -->
-                            <div class="form-outline mb-4">
-                                <label class="form-label" for="form6Example3">ID</label>
-                                <input type="text" name="actusID" value="<?php echo $actusID; ?>" id="form6Example3" class="form-control" />
-                            </div>
-
                             <div class="form-outline mb-4">
                                 <label class="form-label" for="form6Example3">Titre de l'actualité</label>
                                 <input type="text" name="actusNom" value="<?php echo $actusNom; ?>" id="form6Example3" class="form-control" />
@@ -100,21 +117,8 @@ $postedContenu = addslashes($_POST['actusContenu']);
                         </form>
 
                         <?php
-                        if ($_POST['submit']) {
-                            $requete = "UPDATE news SET news_date= :newDate, news_nom= :newNom, news_contenu= :newContenu WHERE news_ID= :newID ";
-
-                            $sth = $bdd->prepare($requete);
-                            if ($sth->execute(array(
-                                    'newID' => $postedID,
-                                    'newDate' => $postedDate,
-                                    'newNom' => $postedNom,
-                                    'newContenu' => $postedContenu
-                                    ))) {
-                        echo "La nouvelle actualité a bien été enregistrée.";
-                            }
-                            $bdd = null;
-                        }
-                        ?>
+                        if(isset($message))
+                            echo $message;  ?>
 
                     </div>
                 </div>

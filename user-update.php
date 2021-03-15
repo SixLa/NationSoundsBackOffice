@@ -1,29 +1,11 @@
 <?php
-/*// Connexion à la base de données
+// Connexion à la base de données
 include('connection.php');
-$mapID = $_GET['id'];
-$mapNom = $_GET['nom'];
-$mapFiltre = $_GET['filtre'];
-$mapLongitude = $_GET['longitude'];
-$mapLatitude = $_GET['latitude'];
-
-// $postedID = $_POST['mapID'];
-$postedID = isset($_POST['mapID']) ? $_POST['mapID'] : NULL;
-// $postedNom = addslashes($_POST['mapNom']);
-$postedNom = isset($_POST['mapNom']) ? $_POST['mapNom'] : NULL;
-// $postedFiltre = $_POST['mapFiltre'];
-$postedFiltre = isset($_POST['mapFiltre']) ? $_POST['mapFiltre'] : NULL;
-// $postedLongitude = $_POST['mapLongitude'];
-$postedLongitude = isset($_POST['mapLongitude']) ? $_POST['mapLongitude'] : NULL;
-// $postedLatitude = $_POST['mapLatitude'];
-$postedLatitude = isset($_POST['mapLatitude']) ? $_POST['mapLatitude'] : NULL;
-*/?>
-<?php
-$mapID = $_GET['id'];
-$mapNom = $_GET['nom'];
-$mapFiltre = $_GET['filtre'];
-$mapLongitude = $_GET['longitude'];
-$mapLatitude = $_GET['latitude'];
+$adminID = $_GET['ID'];
+$adminEmail = $_GET['email'];
+$adminPassword = $_GET['password'];
+$adminPseudo = $_GET['pseudo'];
+$adminPermission = $_GET['permission'];
 ?>
 
 <!DOCTYPE html>
@@ -80,37 +62,39 @@ $mapLatitude = $_GET['latitude'];
             <div class="container-fluid">
 
                 <!-- Page Heading -->
-                <h1 class="h3 mb-2 text-white">Modifier un point d'intérêt sur la carte</h1>
+                <h1 class="h3 mb-2 text-white">Modifier un rôle</h1>
 
                 <!-- DataTales Example -->
                 <div class="card shadow mb-4">
                     <div class="card-body">
 
                         <?php
-                        function updateMap($mapID, $mapNom, $mapFiltre, $mapLongitude, $mapLatitude){
+
+                        // Fonction update des utilisateurs
+                        function updateUser($adminID, $adminEmail, $adminPassword, $adminPseudo, $adminPermission){
                             require("connection.php");
-                            $requete = "UPDATE info_map SET map_nomlieu= :newNom, map_filtre= :newFiltre, map_longitude= :newLongitude, map_latitude= :newLatitude WHERE map_ID= :newID ";
+                            $requete = "UPDATE utilisateurs SET admin_email= :adminEmail, admin_password= :adminPassword, admin_pseudo= :adminPseudo, admin_permission= :adminPermission WHERE admin_ID= :adminID ";
                             $sth = $bdd->prepare($requete);
                             $sth->execute(array(
-                                'newID' => $mapID,
-                                'newNom' => $mapNom,
-                                'newFiltre' => $mapFiltre,
-                                'newLongitude' => $mapLongitude,
-                                'newLatitude' => $mapLatitude,
+                                'adminID' => $adminID,
+                                'adminEmail' => $adminEmail,
+                                'adminPassword' => $adminPassword,
+                                'adminPseudo' => $adminPseudo,
+                                'adminPermission' => $adminPermission
                             ));
                             $bdd = null;
                         }
                         // Lorsque l'utilisateur clique sur le bouton submit et si les champs ne sont pas vides
                         if (isset($_POST['submit'])) {
-                            if (empty($_POST['mapNom']) || empty($_POST['mapFiltre']) || empty($_POST['mapLongitude']) || empty($_POST['mapLatitude'])) {
+                            if (empty($_POST['adminEmail']) || empty($_POST['adminPassword']) || empty($_POST['adminPseudo']) || empty($_POST['adminPermission'])) {
                                 $message = "<p class='text-danger'>Veuillez remplir tous les champs du formulaire.</p>";
                             } else {
-                                updateMap($mapID, $_POST['mapNom'], $_POST['mapFiltre'], $_POST['mapLongitude'], $_POST['mapLatitude']);
-                                $message = "<p class='text-success'>Le point d'intérêt a bien été modifié.</p>";
-                                $mapNom = $_POST['mapNom'];
-                                $mapFiltre = $_POST['mapFiltre'];
-                                $mapLongitude = $_POST['mapLongitude'];
-                                $mapLatitude = $_POST['mapLatitude'];
+                                updateUser($adminID, $_POST['adminEmail'], $_POST['adminPassword'], $_POST['adminPseudo'], $_POST['adminPermission']);
+                                $message = "<p class='text-success'>Le rôle a bien été modifié.</p>";
+                                $adminEmail = $_POST['adminEmail'];
+                                $adminPassword = $_POST['adminPassword'];
+                                $adminPseudo = $_POST['adminPseudo'];
+                                $adminPermission = $_POST['adminPermission'];
                             }
                         }
                         ?>
@@ -119,26 +103,32 @@ $mapLatitude = $_GET['latitude'];
 
                             <!-- Text input -->
                             <div class="form-outline mb-4">
-                                <label class="form-label" for="form6Example3">Nom du point d'intérêt</label>
-                                <input type="text" name="mapNom" value="<?php echo $mapNom; ?>" id="form6Example3" class="form-control" />
+                                <label class="form-label" for="form6Example3">Email</label>
+                                <input type="email" name="adminEmail" value="<?php echo $adminEmail; ?>" id="form6Example3" class="form-control" />
                             </div>
                             <!-- Text input -->
                             <div class="form-outline mb-4">
-                                <label class="form-label" for="form6Example3">Filtre correspondant</label>
-                                <input type="text" name="mapFiltre" value="<?php echo $mapFiltre; ?>" id="form6Example3" class="form-control" />
+                                <label class="form-label" for="form6Example3">Mot de passe (doit comporter au munimum : 8 caractères, 1 majuscule, 1 minuscule, 1 chiffre)</label>
+                                <input type="password" name="adminPassword" value="<?php echo $adminPassword; ?>" id="form6Example3" class="form-control" />
                             </div>
-
-                            <!-- Message input -->
+                            <!-- Text input -->
                             <div class="form-outline mb-4">
-                                <label class="form-label" for="form6Example7">Longitude</label>
-                                <input class="form-control" name="mapLongitude" value="<?php echo $mapLongitude; ?>" id="form6Example7" rows="4"></input>
+                                <label class="form-label" for="form6Example3">Pseudo</label>
+                                <input type="text" name="adminPseudo" value="<?php echo $adminPseudo; ?>" id="form6Example3" class="form-control" />
                             </div>
-
-                                <!-- Message input -->
+                            <!-- Liste déroulante -->
                             <div class="form-outline mb-4">
-                                <label class="form-label" for="form6Example7">Latitude</label>
-                                <input class="form-control" name="mapLatitude" value="<?php echo $mapLatitude; ?>" id="form6Example7" rows="4"></input>
+                                <label class="form-label" for="form6Example3">Permission actuelle : <?php echo $adminPermission; ?> </label> <br>
+                                <label class="form-label" for="form6Example3">Nouvelle permission :</label> 
+                                    <SELECT id="form6Example3" class="form-control" name="adminPermission" size="1" value="">
+                                        <OPTION value="">--sélectionnez un rôle--
+                                        <OPTION value="Administrateur">Administrateur
+                                        <OPTION value="Éditeur">Éditeur
+                                        <OPTION value="Auteur">Auteur
+                                        <OPTION value="Abonné">Abonné
+                                    </SELECT>
                             </div>
+                           
 
                             <!-- Submit button -->
                             <input type="submit" name="submit" class="col-lg-3 btn btn-primary btn-block mb-4 float-right" value="Enregistrer" />
@@ -194,3 +184,4 @@ $mapLatitude = $_GET['latitude'];
 </body>
 
 </html>
+

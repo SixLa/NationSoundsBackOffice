@@ -28,12 +28,20 @@ function updateArtistes($id, $nom, $descrip){
 
 function deleteArtiste($id){
 	require("connection.php");
+	deleteParticipationFromArtiste($id);
 	$request = $bdd->prepare('DELETE FROM artistes WHERE artistes_ID = :array_id');
 	$request->execute(array(':array_id' => $id));
 
 	$bdd = NULL;
+}
 
+function deleteParticipationFromArtiste($id){
 
+	require("connection.php");
+	$request = $bdd->prepare('DELETE FROM participe WHERE fk_artiste_ID = :array_id');
+	$request->execute(array(':array_id' => $id));
+
+    $bdd = NULL;
 }
 
 function showArtistes(){
